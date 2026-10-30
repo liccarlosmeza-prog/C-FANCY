@@ -1,0 +1,42 @@
+# Documentación HTTP. El dominio es un marcador NO operativo.
+# Sustituir baseUrl solo tras implementar en entorno de pruebas.
+@baseUrl = https://example.invalid/api/v1
+
+### Categorías
+GET {{baseUrl}}/categories
+
+### Diez fixtures en cinco páginas de dos
+GET {{baseUrl}}/products?page=1&page_size=2&sort=name_asc
+
+### Buscar sin acento
+GET {{baseUrl}}/products?q=vinculo
+
+### Filtros AND con precio mínimo
+GET {{baseUrl}}/products?category=anillos&price_min=40000
+
+### Detalle
+GET {{baseUrl}}/products/anillo-aurora
+
+### Obtener CSRF antes de mutaciones; conservar cookie de pre-sesión
+GET {{baseUrl}}/auth/csrf
+
+### Registro de ejemplo, NO enviar en producción
+POST {{baseUrl}}/auth/register
+Content-Type: application/json
+X-CSRF-Token: REEMPLAZAR_POR_TOKEN_DE_PRESESION
+
+{"name":"Usuario de prueba","email":"prueba@example.invalid","password":"MARCADOR_NO_USAR_COMO_CLAVE_REAL"}
+
+### Login de prueba y conservar cookie devuelta
+POST {{baseUrl}}/auth/login
+Content-Type: application/json
+X-CSRF-Token: REEMPLAZAR_POR_TOKEN_DE_PRESESION
+
+{"email":"prueba@example.invalid","password":"MARCADOR_NO_USAR_COMO_CLAVE_REAL"}
+
+### Usuario; la herramienta HTTP debe enviar cookie de sesión
+GET {{baseUrl}}/auth/me
+
+### Logout; usar token rotado de sesión y cookie
+POST {{baseUrl}}/auth/logout
+X-CSRF-Token: REEMPLAZAR_POR_TOKEN_DE_SESION

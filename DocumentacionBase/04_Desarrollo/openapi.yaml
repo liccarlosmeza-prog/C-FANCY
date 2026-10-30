@@ -1,0 +1,576 @@
+openapi: 3.0.3
+info:
+  title: C FANCY API propuesta
+  version: 0.4.0
+  description: Contrato de especificación, no servidor ejecutado. Datos demo separados.
+    Mismo origen HTTPS. Campos derivados del catálogo se mapean según Mapeo_fixtures.md.
+servers:
+- url: https://example.invalid/api/v1
+  description: Placeholder no operativo; sustituir en implementación
+paths:
+  /auth/csrf:
+    get:
+      summary: Obtener token CSRF asociado a pre-sesión o sesión
+      security: []
+      responses:
+        '200':
+          description: No cachear; puede emitir cookie de pre-sesión
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - csrf_token
+                properties:
+                  csrf_token:
+                    type: string
+  /auth/register:
+    post:
+      summary: Registrar cuenta; 202 genérico incluso para email existente
+      parameters:
+      - &id001
+        name: X-CSRF-Token
+        in: header
+        required: true
+        schema:
+          type: string
+          minLength: 1
+        description: Obtenido de GET /auth/csrf y asociado a pre-sesión o sesión.
+          Rotar después de login.
+      responses:
+        '202':
+          description: Registrar cuenta; 202 genérico incluso para email existente
+        '400': &id002
+          description: Solicitud inválida
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403': &id003
+          description: CSRF u origen inválido
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '429': &id004
+          description: Límite de intentos; incluir Retry-After
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500': &id005
+          description: Error interno sin datos sensibles
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RegisterInput'
+  /auth/login:
+    post:
+      summary: Iniciar sesión y rotar identificador
+      parameters:
+      - *id001
+      responses:
+        '200':
+          description: Iniciar sesión y rotar identificador
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+          headers:
+            Set-Cookie:
+              description: __Host-cf_session; Secure; HttpOnly; SameSite=Lax; Path=/.
+                No devolver token en JSON.
+              schema:
+                type: string
+        '400': *id002
+        '403': *id003
+        '429': *id004
+        '500': *id005
+        '401': &id006
+          description: Sesión o credenciales inválidas
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoginInput'
+  /auth/logout:
+    post:
+      summary: Invalidar sesión y expirar cookie
+      parameters:
+      - *id001
+      responses:
+        '204':
+          description: Invalidar sesión y expirar cookie
+          headers:
+            Set-Cookie:
+              description: Expirar cookie con Max-Age=0 y mismo Path, Secure, HttpOnly,
+                SameSite.
+              schema:
+                type: string
+        '400': *id002
+        '403': *id003
+        '429': *id004
+        '500': *id005
+        '401': *id006
+      security:
+      - cookieAuth: []
+  /auth/me:
+    get:
+      summary: Obtener usuario de la sesión
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          description: Usuario sin datos de autenticación
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '401': *id006
+  /categories:
+    get:
+      summary: Listar categorías de tipo
+      security: []
+      responses:
+        '200':
+          description: Lista
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Category'
+  /collections:
+    get:
+      summary: Listar colecciones editoriales
+      security: []
+      responses:
+        '200':
+          description: Lista
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Category'
+  /products:
+    get:
+      summary: Listar o buscar productos con filtros AND y paginación
+      description: q se compara con nombre sin acentos ni mayúsculas. Rango inclusivo.
+        min>max=400. Orden estable con id como desempate. Más allá de última página
+        devuelve items vacíos. Solo publicados; entorno demo permite demo_only.
+      security: []
+      parameters:
+      - name: q
+        in: query
+        schema:
+          type: string
+          maxLength: 100
+      - name: category
+        in: query
+        schema:
+          type: string
+          enum:
+          - anillos
+          - aretes
+          - collares
+          - pulseras
+      - name: collection
+        in: query
+        schema:
+          type: string
+          enum:
+          - novedades
+          - oro-18k
+          - diamantes-naturales
+          - diamantes-de-laboratorio
+          - plata-925
+          - gemas-preciosas
+          - alta-joyeria
+          - piezas-personalizadas
+          - con-significado
+      - name: material
+        in: query
+        schema:
+          type: string
+          enum:
+          - gold
+          - silver
+      - name: stone_origin
+        in: query
+        schema:
+          type: string
+          enum:
+          - natural
+          - laboratory
+          - mixed
+          - none
+      - name: price_min
+        in: query
+        schema:
+          type: number
+          minimum: 0
+      - name: price_max
+        in: query
+        schema:
+          type: number
+          minimum: 0
+      - name: sort
+        in: query
+        schema:
+          type: string
+          enum:
+          - name_asc
+          - price_asc
+          - price_desc
+          default: name_asc
+      - name: page
+        in: query
+        schema:
+          type: integer
+          minimum: 1
+          default: 1
+      - name: page_size
+        in: query
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 50
+          default: 12
+      responses:
+        '200':
+          description: Lista paginada
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductList'
+        '400': *id002
+        '500': *id005
+  /products/{slug}:
+    get:
+      summary: Consultar detalle de producto
+      security: []
+      parameters:
+      - name: slug
+        in: path
+        required: true
+        schema:
+          type: string
+          pattern: ^[a-z0-9-]+$
+      responses:
+        '200':
+          description: Detalle
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductDetail'
+        '404':
+          description: Recurso no encontrado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500': *id005
+components:
+  securitySchemes:
+    cookieAuth:
+      type: apiKey
+      in: cookie
+      name: __Host-cf_session
+  schemas:
+    Error:
+      type: object
+      required:
+      - code
+      - message
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+        fields:
+          type: object
+          additionalProperties:
+            type: string
+    User:
+      type: object
+      required:
+      - id
+      - name
+      - email
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+        email:
+          type: string
+          format: email
+    RegisterInput:
+      type: object
+      additionalProperties: false
+      required:
+      - name
+      - email
+      - password
+      properties:
+        name:
+          type: string
+          minLength: 2
+          maxLength: 100
+        email:
+          type: string
+          format: email
+          maxLength: 254
+        password:
+          type: string
+          minLength: 15
+          maxLength: 128
+          writeOnly: true
+        marketing_opt_in:
+          type: boolean
+          default: false
+    LoginInput:
+      type: object
+      additionalProperties: false
+      required:
+      - email
+      - password
+      properties:
+        email:
+          type: string
+          format: email
+          maxLength: 254
+        password:
+          type: string
+          minLength: 1
+          maxLength: 128
+          writeOnly: true
+    Category:
+      type: object
+      required:
+      - id
+      - name
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+    Media:
+      type: object
+      required:
+      - url
+      - view
+      - alt
+      properties:
+        url:
+          type: string
+          format: uri
+        view:
+          type: string
+        alt:
+          type: string
+    Variant:
+      type: object
+      required:
+      - sku
+      - label
+      - availability
+      properties:
+        sku:
+          type: string
+        label:
+          type: string
+        availability:
+          type: string
+          enum:
+          - in_stock
+          - out_of_stock
+          - made_to_order
+        personalization_max_length:
+          type: integer
+          nullable: true
+    Certificate:
+      type: object
+      required:
+      - issuer
+      - report
+      - verified
+      properties:
+        issuer:
+          type: string
+        report:
+          type: string
+        verified:
+          type: boolean
+        url:
+          type: string
+          format: uri
+          nullable: true
+    ProductCard:
+      type: object
+      required:
+      - id
+      - sku
+      - slug
+      - name
+      - category
+      - price_mxn
+      - currency
+      - availability
+      - is_demo
+      properties:
+        id:
+          type: integer
+        sku:
+          type: string
+        slug:
+          type: string
+        name:
+          type: string
+        category:
+          type: string
+        material:
+          type: string
+        price_mxn:
+          type: number
+          minimum: 0
+        currency:
+          type: string
+          enum:
+          - MXN
+        image:
+          allOf:
+          - $ref: '#/components/schemas/Media'
+          nullable: true
+        availability:
+          type: string
+          enum:
+          - in_stock
+          - out_of_stock
+          - made_to_order
+        is_demo:
+          type: boolean
+    ProductDetail:
+      allOf:
+      - $ref: '#/components/schemas/ProductCard'
+      - type: object
+        required:
+        - description
+        - variants
+        - images
+        - certificate_status
+        - policies_status
+        properties:
+          description:
+            type: string
+          metal_karat:
+            type: integer
+            nullable: true
+          metal_fineness:
+            type: integer
+            nullable: true
+          stone_type:
+            type: string
+          stone_origin:
+            type: string
+            enum:
+            - natural
+            - laboratory
+            - mixed
+            - none
+          stone_details:
+            type: string
+          stone_carat_total:
+            type: number
+            nullable: true
+          weight_g:
+            type: number
+            minimum: 0
+          measurements:
+            type: string
+          variants:
+            type: array
+            items:
+              $ref: '#/components/schemas/Variant'
+          images:
+            type: array
+            items:
+              $ref: '#/components/schemas/Media'
+          video_url:
+            type: string
+            format: uri
+            nullable: true
+          certificate_status:
+            type: string
+            enum:
+            - pending_verification
+            - verified
+            - not_applicable
+          certificates:
+            type: array
+            items:
+              $ref: '#/components/schemas/Certificate'
+          care:
+            type: string
+          delivery_estimate:
+            type: string
+            nullable: true
+          warranty:
+            type: string
+          shipping_policy:
+            type: string
+          returns_policy:
+            type: string
+          policies_status:
+            type: string
+            enum:
+            - draft
+            - approved
+          collections:
+            type: array
+            items:
+              type: string
+          intention_optional:
+            type: string
+            nullable: true
+    ProductList:
+      type: object
+      required:
+      - items
+      - total
+      - page
+      - page_size
+      - total_pages
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProductCard'
+        total:
+          type: integer
+          minimum: 0
+        page:
+          type: integer
+          minimum: 1
+        page_size:
+          type: integer
+          minimum: 1
+          maximum: 50
+        total_pages:
+          type: integer
+          minimum: 0

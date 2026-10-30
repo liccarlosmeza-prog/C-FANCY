@@ -1,0 +1,34 @@
+{
+  "items": [
+    {
+      "id": 1,
+      "sku": "CF-DEMO-001",
+      "slug": "anillo-aurora",
+      "name": "Anillo Aurora",
+      "category": "anillos",
+      "material": "Oro amarillo",
+      "price_mxn": 38900,
+      "currency": "MXN",
+      "is_demo": true,
+      "image": null,
+      "availability": "in_stock"
+    },
+    {
+      "id": 5,
+      "sku": "CF-DEMO-005",
+      "slug": "anillo-esencia-rosa",
+      "name": "Anillo Esencia Rosa",
+      "category": "anillos",
+      "material": "Oro rosa",
+      "price_mxn": 52900,
+      "currency": "MXN",
+      "is_demo": true,
+      "image": null,
+      "availability": "in_stock"
+    }
+  ],
+  "total": 10,
+  "page": 1,
+  "page_size": 2,
+  "total_pages": 5
+}

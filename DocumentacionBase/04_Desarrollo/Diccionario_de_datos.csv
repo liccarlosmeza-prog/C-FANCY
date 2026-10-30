@@ -1,0 +1,21 @@
+﻿entidad,campo,tipo,obligatorio,regla
+users,id,UUID,sí,PK; no exponer hash
+users,email_normalized,varchar254,sí,único; sin espacios externos
+users,password_hash,string,sí,Argon2id; nunca en respuesta API
+sessions,token_hash,string,sí,hash de sesión opaca; revocable
+sessions,expires_at / absolute_expires_at,datetime,sí,30min inactividad/12h total propuestos
+categories,id / name,string,sí,4 categorías de tipo
+products,id / sku / slug,int / string,sí,unicidad; identificadores estables
+products,name / description,string,sí,texto mostrado
+products,price_mxn / currency,decimal / enum,sí,>=0; MXN
+products,metal_karat / metal_fineness,int nullable,condicional,k del oro; plata usa 925
+products,stone_origin,enum,sí,natural/laboratory/mixed/none
+products,stone_carat_total,decimal nullable,condicional,ct total; no k
+products,weight_g / measurements,decimal / text,sí,valores verificados al publicar
+products,publication_status / is_demo,enum / bool,sí,"demo_only, draft, published; gate producción"
+variants,sku / product_id / label,string / FK,sí,existencia por opción
+variants,stock_qty,int,sí,>=0; privado para inventario
+media,url / view / alt / position,string/int,sí al publicar,sin rutas locales en producción
+certificates,issuer / report / verified / url,string/bool,si aplica,no inventar número; acceso controlado si contiene PII
+product_collections,product_id / collection_id,FK,opcional,relación N a N
+policies,version / product_applicability,string,sí al publicar,"garantía, envío y devoluciones aprobados"

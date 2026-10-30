@@ -1,0 +1,224 @@
+{
+  "version": "1.0",
+  "date": "2026-10-29",
+  "status": "proposed_not_imported",
+  "categories": [
+    {
+      "id": "anillos",
+      "name": "Anillos"
+    },
+    {
+      "id": "aretes",
+      "name": "Aretes"
+    },
+    {
+      "id": "collares",
+      "name": "Collares"
+    },
+    {
+      "id": "pulseras",
+      "name": "Pulseras"
+    }
+  ],
+  "collections": [
+    {
+      "id": "novedades",
+      "name": "Novedades",
+      "active": true,
+      "approval_required": false
+    },
+    {
+      "id": "oro-18k",
+      "name": "Oro 18K",
+      "active": true,
+      "approval_required": false
+    },
+    {
+      "id": "diamantes-naturales",
+      "name": "Diamantes Naturales",
+      "active": true,
+      "approval_required": false
+    },
+    {
+      "id": "diamantes-de-laboratorio",
+      "name": "Diamantes De Laboratorio",
+      "active": true,
+      "approval_required": false
+    },
+    {
+      "id": "plata-925",
+      "name": "Plata 925",
+      "active": true,
+      "approval_required": false
+    },
+    {
+      "id": "gemas-preciosas",
+      "name": "Gemas Preciosas",
+      "active": true,
+      "approval_required": false
+    },
+    {
+      "id": "alta-joyeria",
+      "name": "Alta Joyeria",
+      "active": true,
+      "approval_required": true
+    },
+    {
+      "id": "piezas-personalizadas",
+      "name": "Piezas Personalizadas",
+      "active": true,
+      "approval_required": false
+    },
+    {
+      "id": "con-significado",
+      "name": "Con Significado",
+      "active": false,
+      "approval_required": false
+    }
+  ],
+  "material_definitions": [
+    {
+      "id": "oro-amarillo-18k",
+      "metal": "gold",
+      "color": "yellow",
+      "karat": 18,
+      "fineness": 750
+    },
+    {
+      "id": "oro-blanco-18k",
+      "metal": "gold",
+      "color": "white",
+      "karat": 18,
+      "fineness": 750
+    },
+    {
+      "id": "oro-rosa-18k",
+      "metal": "gold",
+      "color": "rose",
+      "karat": 18,
+      "fineness": 750
+    },
+    {
+      "id": "plata-925",
+      "metal": "silver",
+      "color": "silver",
+      "karat": null,
+      "fineness": 925
+    }
+  ],
+  "stone_types": [
+    {
+      "id": "diamond",
+      "label": "Diamante"
+    },
+    {
+      "id": "sapphire",
+      "label": "Zafiro"
+    },
+    {
+      "id": "emerald",
+      "label": "Esmeralda"
+    }
+  ],
+  "stone_origins": [
+    {
+      "id": "natural",
+      "label": "Natural"
+    },
+    {
+      "id": "laboratory",
+      "label": "De laboratorio"
+    },
+    {
+      "id": "unknown",
+      "label": "Pendiente de verificar"
+    }
+  ],
+  "stone_treatment_statuses": [
+    "unknown",
+    "documented_treated",
+    "documented_no_treatment"
+  ],
+  "size_systems": [
+    "US_ring",
+    "length_cm",
+    "pair",
+    "custom"
+  ],
+  "availability_statuses": [
+    "in_stock",
+    "out_of_stock",
+    "made_to_order",
+    "unknown"
+  ],
+  "publication_statuses": [
+    "draft",
+    "review",
+    "published",
+    "archived",
+    "demo_only"
+  ],
+  "verification_statuses": [
+    "pending",
+    "approved",
+    "rejected"
+  ],
+  "certificate_statuses": [
+    "not_applicable",
+    "pending",
+    "verified"
+  ],
+  "media_views": [
+    "front",
+    "side",
+    "detail",
+    "scale",
+    "clasp",
+    "packaging"
+  ],
+  "media_source_kinds": [
+    "ai_generated",
+    "product_photo",
+    "product_video"
+  ],
+  "price_modes": [
+    "fixed",
+    "quote",
+    "demo"
+  ],
+  "currencies": [
+    "MXN"
+  ],
+  "advisory_statuses": [
+    "new",
+    "assigned",
+    "contacted",
+    "qualified",
+    "quoted",
+    "closed_won",
+    "closed_lost"
+  ],
+  "consent_purposes": [
+    "marketing_email",
+    "marketing_messaging",
+    "optional_analytics"
+  ],
+  "policy_types": [
+    "privacy",
+    "shipping",
+    "returns",
+    "warranty",
+    "terms"
+  ],
+  "roles": [
+    "catalog_editor",
+    "commercial_approver",
+    "advisory_operator",
+    "technical_admin"
+  ],
+  "notes": [
+    "Valores propuestos; no afirman disponibilidad ni certificacion.",
+    "Canales y finalidades requieren configuracion aprobada.",
+    "closed_won exige operacion comercial real; no usar por seleccion demo."
+  ]
+}

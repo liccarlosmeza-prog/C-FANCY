@@ -1,0 +1,13 @@
+:root {
+  --color-ivory: #F5F1EA;
+  --color-plum: #390D2E;
+  --color-pink: #EDC0D3;
+  --color-lavender: #A3ACEF;
+  --color-sky: #9FC6E7;
+  --color-mint: #8CCCC1;
+  --color-coral: #E77E71;
+  --font-display: "Cormorant Garamond", Georgia, serif;
+  --font-body: "Manrope", Arial, sans-serif;
+  --radius-control: 4px;
+  --space-section: 96px;
+}

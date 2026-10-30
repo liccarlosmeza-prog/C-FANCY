@@ -1,0 +1,10 @@
+node_modules
+dist
+runtime
+.env
+.env.*
+.git
+DocumentacionBase
+docs/capturas
+tests
+*.log

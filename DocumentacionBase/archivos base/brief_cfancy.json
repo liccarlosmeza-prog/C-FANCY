@@ -1,0 +1,35 @@
+{
+  "brand": "C’FANCY",
+  "date": "2026-10-29",
+  "territory": "Mexico",
+  "status": "planning_proposed",
+  "existing_site_path": "../DESPLIEGUE",
+  "current_state": "Functional demo; not commercial inventory",
+  "business_model": "Direct brand catalog with personal advice; manufacturing/resale arrangement pending",
+  "declared_audience": {
+    "primary": "Women 30-50 with high purchasing power, owner brief",
+    "extended": "Women 25-65 interested in fine jewelry",
+    "validated": false
+  },
+  "product_families": [
+    "anillos",
+    "aretes",
+    "collares",
+    "pulseras"
+  ],
+  "demo_products": 10,
+  "desired_release_proposed": "Phase A: verified catalog with advice; Phase B transactions separate",
+  "budget": {
+    "amount": null,
+    "currency": "MXN",
+    "approved": false
+  },
+  "product_owner": null,
+  "sources": [
+    "../01_Marca/Identidad_de_marca.md",
+    "../02_Catalogo/productos_demo.json",
+    "../DESPLIEGUE/README.md"
+  ],
+  "approved_decisions": [],
+  "external_actions_authorized": []
+}

@@ -1,0 +1,776 @@
+{
+  "version": "1.0",
+  "date": "2026-10-29",
+  "product_goal": "Catalogo verificado con asesoria medible; sin checkout en fase A",
+  "points_are_provisional": true,
+  "items": [
+    {
+      "id": "CF-01",
+      "order": 1,
+      "epic": "Base",
+      "title": "Auditar lo existente sin rehacer la demo",
+      "user_story": {
+        "role": "responsable de la experiencia comercial",
+        "need": "Auditar lo existente sin rehacer la demo",
+        "benefit": "un catalogo confiable y una operacion trazable sin confundir demostracion y venta"
+      },
+      "priority": "Must",
+      "points_provisional": 3,
+      "proposed_sprint": 1,
+      "dependencies": [],
+      "acceptance_criteria": [
+        "Inventario de pantallas, API y pruebas con evidencia y limitaciones.",
+        "Clasificar cada requisito como observado, pendiente o requiere correccion; conservar cambios previos."
+      ],
+      "owner_role_proposed": "Equipo implementador",
+      "status": "verified_local",
+      "evidence": [
+        "DESPLIEGUE/docs/PLAN_POR_PROCESOS.md",
+        "DESPLIEGUE/docs/VERIFICACION_V2.md"
+      ],
+      "implementation_summary": "Inventario y replanificacion por P1-P6; version previa conservada en runtime/snapshots.",
+      "remaining_acceptance": ""
+    },
+    {
+      "id": "CF-02",
+      "order": 2,
+      "epic": "Base",
+      "title": "Acordar alcance A y responsables",
+      "user_story": {
+        "role": "responsable de la experiencia comercial",
+        "need": "Acordar alcance A y responsables",
+        "benefit": "un catalogo confiable y una operacion trazable sin confundir demostracion y venta"
+      },
+      "priority": "Must",
+      "points_provisional": 2,
+      "proposed_sprint": 1,
+      "dependencies": [
+        "CF-01"
+      ],
+      "acceptance_criteria": [
+        "Product Owner identificado y salida catalogo/asesoria aprobada.",
+        "Checkout fuera de A; presupuesto, cobertura y canal registrados como decision."
+      ],
+      "owner_role_proposed": "Product Owner",
+      "status": "pending_external_decision",
+      "evidence": [
+        "DESPLIEGUE/docs/PLAN_POR_PROCESOS.md",
+        "DESPLIEGUE/docs/VERIFICACION_V2.md"
+      ],
+      "implementation_summary": "Implementacion local autorizada por la propietaria en esta conversacion.",
+      "remaining_acceptance": "Designar responsables y aprobar salida comercial, presupuesto y cobertura."
+    },
+    {
+      "id": "CF-03",
+      "order": 3,
+      "epic": "Datos",
+      "title": "Validar modelo, catalogos y correspondencia de IDs",
+      "user_story": {
+        "role": "responsable de la experiencia comercial",
+        "need": "Validar modelo, catalogos y correspondencia de IDs",
+        "benefit": "un catalogo confiable y una operacion trazable sin confundir demostracion y venta"
+      },
+      "priority": "Must",
+      "points_provisional": 5,
+      "proposed_sprint": 1,
+      "dependencies": [
+        "CF-02"
+      ],
+      "acceptance_criteria": [
+        "No se duplican variantes por coleccion; precio en centavos y SKU unico.",
+        "Mapeo de los diez fixtures y estrategia de migracion/rollback documentados, sin tocar datos reales."
+      ],
+      "owner_role_proposed": "Responsable de datos",
+      "status": "verified_local",
+      "evidence": [
+        "DESPLIEGUE/docs/PLAN_POR_PROCESOS.md",
+        "DESPLIEGUE/docs/VERIFICACION_V2.md"
+      ],
+      "implementation_summary": "Esquema SQLite relacional/editorial, SKUs unicos, centavos, medios, materiales y gemas; migracion conservadora.",
+      "remaining_acceptance": ""
+    },
+    {
+      "id": "CF-04",
+      "order": 4,
+      "epic": "Catalogo",
+      "title": "Preparar surtido comercial verificable",
+      "user_story": {
+        "role": "clienta o responsable del canal",
+        "need": "Preparar surtido comercial verificable",
+        "benefit": "un catalogo confiable y una operacion trazable sin confundir demostracion y venta"
+      },
+      "priority": "Must",
+      "points_provisional": 5,
+      "proposed_sprint": 1,
+      "dependencies": [
+        "CF-03"
+      ],
+      "acceptance_criteria": [
+        "Cada referencia seleccionada tiene material, medidas, variantes, fuente y aprobador.",
+        "Faltantes permanecen en borrador; no convertir precios demo en aprobados."
+      ],
+      "owner_role_proposed": "Catalogo + Product Owner",
+      "status": "implemented_with_external_pending",
+      "evidence": [
+        "DESPLIEGUE/docs/PLAN_POR_PROCESOS.md",
+        "DESPLIEGUE/docs/VERIFICACION_V2.md"
+      ],
+      "implementation_summary": "Editor y validaciones de evidencia implementados.",
+      "remaining_acceptance": "Recibir y aprobar surtido real y fuentes del proveedor."
+    },
+    {
+      "id": "CF-05",
+      "order": 5,
+      "epic": "Contenido",
+      "title": "Definir y reunir medios autorizados",
+      "user_story": {
+        "role": "clienta o responsable del canal",
+        "need": "Definir y reunir medios autorizados",
+        "benefit": "un catalogo confiable y una operacion trazable sin confundir demostracion y venta"
+      },
+      "priority": "Must",
+      "points_provisional": 3,
+      "proposed_sprint": 1,
+      "dependencies": [
+        "CF-04"
+      ],
+      "acceptance_criteria": [
+        "Matriz por SKU con tres vistas, alt, procedencia y permisos.",
+        "La IA se identifica; fotografia comercial real pendiente bloquea ofrecer esa pieza como verificada."
+      ],
+      "owner_role_proposed": "Contenido",
+      "status": "implemented_with_external_pending",
+      "evidence": [
+        "DESPLIEGUE/docs/PLAN_POR_PROCESOS.md",
+        "DESPLIEGUE/docs/VERIFICACION_V2.md"
+      ],
+      "implementation_summary": "30 vistas IA identificadas y cargador de fotografias por vista.",
+      "remaining_acceptance": "Fotografias comerciales reales autorizadas por la marca."
+    },
+    {
+      "id": "CF-06",
+      "order": 6,
+      "epic": "Operacion",
+      "title": "Asignar aprobacion comercial y de privacidad",
+      "user_story": {
+        "role": "responsable de la experiencia comercial",
+        "need": "Asignar aprobacion comercial y de privacidad",
+        "benefit": "un catalogo confiable y una operacion trazable sin confundir demostracion y venta"
+      },
+      "priority": "Must",
+      "points_provisional": 3,
+      "proposed_sprint": 1,
+      "dependencies": [
+        "CF-02"
+      ],
+      "acceptance_criteria": [
+        "Responsables de contacto, politicas, datos y precios identificados.",
+        "Lista de textos/evidencias pendientes y fechas objetivo sin afirmar cumplimiento legal."
+      ],
+      "owner_role_proposed": "Product Owner + revisores",
+      "status": "pending_external_decision",
+      "evidence": [
+        "DESPLIEGUE/docs/PLAN_POR_PROCESOS.md",
+        "DESPLIEGUE/docs/VERIFICACION_V2.md"
+      ],
+      "implementation_summary": "Roles admin/cliente, configuracion de contacto y politicas y auditoria disponibles.",
+      "remaining_acceptance": "Asignar responsables reales y aprobar textos/finalidades/retencion."
+    },
+    {
+      "id": "CF-07",
+      "order": 7,
+      "epic": "Datos",
+      "title": "Preparar carga idempotente y excluir demo en produccion",
+      "user_story": {
+        "role": "responsable de la experiencia comercial",
+        "need": "Preparar carga idempotente y excluir demo en produccion",
+        "benefit": "un catalogo confiable y una operacion trazable sin confundir demostracion y venta"
+      },
+      "priority": "Must",
+      "points_provisional": 5,
+      "proposed_sprint": 2,
+      "dependencies": [
+        "CF-03",
+        "CF-04"
+      ],
+      "acceptance_criteria": [
+        "Importar dos veces no duplica ni sobrescribe contenido aprobado.",
+        "Una consulta de produccion no devuelve demo_only ni is_demo=true; reconciliar SKUs y precios."
+      ],
+      "owner_role_proposed": "Equipo implementador",
+      "status": "verified_local",
+      "evidence": [
+        "DESPLIEGUE/docs/PLAN_POR_PROCESOS.md",
+        "DESPLIEGUE/docs/VERIFICACION_V2.md"
+      ],
+      "implementation_summary": "Seed no sobrescribe; variantes/precios relacionados; test de modo operativo excluye catalogo y cuentas demo.",
+      "remaining_acceptance": ""
+    },
+    {
+      "id": "CF-08",
+      "order": 8,
+      "epic": "Catalogo",
+      "title": "Publicar catalogo verificable en entorno de revision",
+      "user_story": {
+        "role": "clienta o responsable del canal",
+        "need": "Publicar catalogo verificable en entorno de revision",
+        "benefit": "un catalogo confiable y una operacion trazable sin confundir demostracion y venta"
+      },
+      "priority": "Must",
+      "points_provisional": 5,
+      "proposed_sprint": 2,
+      "dependencies": [
+        "CF-05",
+        "CF-07"
+      ],
+      "acceptance_criteria": [
+        "Ficha y filtros muestran datos aprobados, variantes y tres vistas; estados vacio/error/agotado cubiertos.",
+        "Precio fijo o Cotizar segun aprobacion, nunca cero por falta de dato; regreso conserva filtros."
+      ],
+      "owner_role_proposed": "Equipo implementador",
+      "status": "implemented_with_external_pending",
+      "evidence": [
+        "DESPLIEGUE/docs/PLAN_POR_PROCESOS.md",
+        "DESPLIEGUE/docs/VERIFICACION_V2.md"
+      ],
+      "implementation_summary": "Catalogo, detalle, filtros, quote/fixed/demo y variantes funcionales con control de publicacion.",
+      "remaining_acceptance": "Publicar solo referencias comerciales aprobadas; las actuales siguen demo."
+    },
+    {
+      "id": "CF-09",
+      "order": 9,
+      "epic": "Atencion",
+      "title": "Conectar asesoria de extremo a extremo",
+      "user_story": {
+        "role": "clienta o responsable del canal",
+        "need": "Conectar asesoria de extremo a extremo",
+        "benefit": "un catalogo confiable y una operacion trazable sin confundir demostracion y venta"
+      },
+      "priority": "Must",
+      "points_provisional": 5,
+      "proposed_sprint": 2,
+      "dependencies": [
+        "CF-06",
+        "CF-08"
+      ],
+      "acceptance_criteria": [
+        "Una consulta de prueba llega a un responsable con SKU y datos minimos.",
+        "Error/reintento no duplica contactos; marketing es independiente; no simular envio exitoso."
+      ],
+      "owner_role_proposed": "Atencion + equipo implementador",
+      "status": "verified_local",
+      "evidence": [
+        "DESPLIEGUE/docs/PLAN_POR_PROCESOS.md",
+        "DESPLIEGUE/docs/VERIFICACION_V2.md"
+      ],
+      "implementation_summary": "Recepcion persistente, folio, propiedad, reintentos idempotentes y respuestas probados por API y navegador.",
+      "remaining_acceptance": ""
+    },
+    {
+      "id": "CF-10",
+      "order": 10,
+      "epic": "Experiencia",
+      "title": "Revisar legibilidad, galeria y rendimiento movil",
+      "user_story": {
+        "role": "clienta o responsable del canal",
+        "need": "Revisar legibilidad, galeria y rendimiento movil",
+        "benefit": "un catalogo confiable y una operacion trazable sin confundir demostracion y venta"
+      },
+      "priority": "Should",
+      "points_provisional": 3,
+      "proposed_sprint": 2,
+      "dependencies": [
+        "CF-08"
+      ],
+      "acceptance_criteria": [
+        "Verificar 360/768/1280, teclado, foco, etiquetas y contraste con evidencia.",
+        "Impresiones y carga de medios razonables; registrar medicion y equipo usado, sin declarar CWV por intuicion."
+      ],
+      "owner_role_proposed": "QA + UX",
+      "status": "implemented_with_external_pending",
+      "evidence": [
+        "DESPLIEGUE/docs/PLAN_POR_PROCESOS.md",
+        "DESPLIEGUE/docs/VERIFICACION_V2.md"
+      ],
+      "implementation_summary": "Interfaces responsive; revision de geometria y capturas de escritorio/movil.",
+      "remaining_acceptance": "Auditoria integral de accesibilidad y rendimiento en dispositivos reales."
+    },
+    {
+      "id": "CF-11",
+      "order": 11,
+      "epic": "Operacion",
+      "title": "Validar opciones y consulta con usuarias",
+      "user_story": {
+        "role": "responsable de la experiencia comercial",
+        "need": "Validar opciones y consulta con usuarias",
+        "benefit": "un catalogo confiable y una operacion trazable sin confundir demostracion y venta"
+      },
+      "priority": "Must",
+      "points_provisional": 3,
+      "proposed_sprint": 2,
+      "dependencies": [
+        "CF-09",
+        "CF-10"
+      ],
+      "acceptance_criteria": [
+        "Cinco pruebas cualitativas registran tarea, exito, friccion y ajuste.",
+        "No inventar participantes; si no se reclutan, dejar pendiente y reevaluar alcance con PO."
+      ],
+      "owner_role_proposed": "Investigacion + Product Owner",
+      "status": "pending_external_decision",
+      "evidence": [
+        "DESPLIEGUE/docs/PLAN_POR_PROCESOS.md",
+        "DESPLIEGUE/docs/VERIFICACION_V2.md"
+      ],
+      "implementation_summary": "Pruebas tecnicas no se presentan como entrevistas.",
+      "remaining_acceptance": "Reclutar y ejecutar cinco pruebas cualitativas con personas reales."
+    },
+    {
+      "id": "CF-12",
+      "order": 12,
+      "epic": "Cuenta",
+      "title": "Completar preparacion de cuenta para lanzamiento",
+      "user_story": {
+        "role": "clienta o responsable del canal",
+        "need": "Completar preparacion de cuenta para lanzamiento",
+        "benefit": "un catalogo confiable y una operacion trazable sin confundir demostracion y venta"
+      },
+      "priority": "Must",
+      "points_provisional": 5,
+      "proposed_sprint": 3,
+      "dependencies": [
+        "CF-01",
+        "CF-06"
+      ],
+      "acceptance_criteria": [
+        "Nombre en encabezado, salida y expiracion comprobados; hash, CSRF y revocacion conservados.",
+        "Recuperacion y verificacion de correo funcionan con proveedor aprobado; sin tokens/PII en logs."
+      ],
+      "owner_role_proposed": "Equipo implementador",
+      "status": "implemented_with_external_pending",
+      "evidence": [
+        "DESPLIEGUE/docs/PLAN_POR_PROCESOS.md",
+        "DESPLIEGUE/docs/VERIFICACION_V2.md"
+      ],
+      "implementation_summary": "Roles, nombre, favoritos, CSRF, revocacion, verificacion y reset de uso unico con buzon local; adaptador de correo preparado.",
+      "remaining_acceptance": "Configurar remitente/proveedor autorizado y verificar entrega externa."
+    },
+    {
+      "id": "CF-13",
+      "order": 13,
+      "epic": "Contenido",
+      "title": "Preparar SEO y contenido de descubrimiento",
+      "user_story": {
+        "role": "clienta o responsable del canal",
+        "need": "Preparar SEO y contenido de descubrimiento",
+        "benefit": "un catalogo confiable y una operacion trazable sin confundir demostracion y venta"
+      },
+      "priority": "Should",
+      "points_provisional": 3,
+      "proposed_sprint": 3,
+      "dependencies": [
+        "CF-08"
+      ],
+      "acceptance_criteria": [
+        "Titulos, descripciones, canonicas y sitemap solo con rutas publicables.",
+        "Datos estructurados de precio/disponibilidad solo si son reales y coinciden con la ficha; no reseñas inventadas."
+      ],
+      "owner_role_proposed": "Contenido + equipo implementador",
+      "status": "implemented_with_external_pending",
+      "evidence": [
+        "DESPLIEGUE/docs/PLAN_POR_PROCESOS.md",
+        "DESPLIEGUE/docs/VERIFICACION_V2.md"
+      ],
+      "implementation_summary": "Titulos, descripcion, canonica y schema condicionados; robots/sitemap excluyen demo y privado.",
+      "remaining_acceptance": "Comprobar indexabilidad y datos estructurados con catalogo real y dominio final."
+    },
+    {
+      "id": "CF-14",
+      "order": 14,
+      "epic": "Marketing",
+      "title": "Instrumentar eventos minimos y tablero",
+      "user_story": {
+        "role": "clienta o responsable del canal",
+        "need": "Instrumentar eventos minimos y tablero",
+        "benefit": "un catalogo confiable y una operacion trazable sin confundir demostracion y venta"
+      },
+      "priority": "Must",
+      "points_provisional": 3,
+      "proposed_sprint": 3,
+      "dependencies": [
+        "CF-09"
+      ],
+      "acceptance_criteria": [
+        "Separar clic de asesoria y consulta recibida; no emitir purchase en demo o seleccion.",
+        "UTM sin PII, finalidad/consentimiento definidos y prueba de evento duplicado."
+      ],
+      "owner_role_proposed": "Marketing + equipo implementador",
+      "status": "verified_local",
+      "evidence": [
+        "DESPLIEGUE/docs/PLAN_POR_PROCESOS.md",
+        "DESPLIEGUE/docs/VERIFICACION_V2.md"
+      ],
+      "implementation_summary": "Eventos agregados sin PII, idempotencia y tablero distinguen clic, consulta y propuesta; no compras ficticias.",
+      "remaining_acceptance": ""
+    },
+    {
+      "id": "CF-15",
+      "order": 15,
+      "epic": "Operacion",
+      "title": "Aprobar precio y condiciones visibles",
+      "user_story": {
+        "role": "responsable de la experiencia comercial",
+        "need": "Aprobar precio y condiciones visibles",
+        "benefit": "un catalogo confiable y una operacion trazable sin confundir demostracion y venta"
+      },
+      "priority": "Must",
+      "points_provisional": 3,
+      "proposed_sprint": 3,
+      "dependencies": [
+        "CF-04",
+        "CF-06"
+      ],
+      "acceptance_criteria": [
+        "Cada precio comercial tiene costo/fuente, aprobador y vigencia o muestra Cotizar.",
+        "Contacto, privacidad, garantia/envios/cambios aprobados; no publicar borradores como condiciones vigentes."
+      ],
+      "owner_role_proposed": "Product Owner + revisores",
+      "status": "implemented_with_external_pending",
+      "evidence": [
+        "DESPLIEGUE/docs/PLAN_POR_PROCESOS.md",
+        "DESPLIEGUE/docs/VERIFICACION_V2.md"
+      ],
+      "implementation_summary": "Editor de precios, evidencia, estado y politicas; el servidor bloquea publicacion incompleta.",
+      "remaining_acceptance": "Aprobar precios/vigencias, contacto y condiciones comerciales reales."
+    },
+    {
+      "id": "CF-16",
+      "order": 16,
+      "epic": "Atencion",
+      "title": "Preparar operacion de seguimiento",
+      "user_story": {
+        "role": "clienta o responsable del canal",
+        "need": "Preparar operacion de seguimiento",
+        "benefit": "un catalogo confiable y una operacion trazable sin confundir demostracion y venta"
+      },
+      "priority": "Must",
+      "points_provisional": 3,
+      "proposed_sprint": 3,
+      "dependencies": [
+        "CF-09",
+        "CF-14"
+      ],
+      "acceptance_criteria": [
+        "Horario, responsable y suplente identificados; una consulta recorre el pipeline.",
+        "Tiempo de primera respuesta medido; retencion y acceso de contactos aprobados."
+      ],
+      "owner_role_proposed": "Atencion",
+      "status": "implemented_with_external_pending",
+      "evidence": [
+        "DESPLIEGUE/docs/PLAN_POR_PROCESOS.md",
+        "DESPLIEGUE/docs/VERIFICACION_V2.md"
+      ],
+      "implementation_summary": "Asignacion a administrador, prioridad, etapas, conversacion, notas privadas, citas y propuestas; tiempo transcurrido medido.",
+      "remaining_acceptance": "Objetivos de horario habil y retencion comercial por aprobar; sin SLA publico garantizado."
+    },
+    {
+      "id": "CF-17",
+      "order": 17,
+      "epic": "Calidad",
+      "title": "Cerrar QA funcional y control de exposicion",
+      "user_story": {
+        "role": "responsable de la experiencia comercial",
+        "need": "Cerrar QA funcional y control de exposicion",
+        "benefit": "un catalogo confiable y una operacion trazable sin confundir demostracion y venta"
+      },
+      "priority": "Must",
+      "points_provisional": 5,
+      "proposed_sprint": 3,
+      "dependencies": [
+        "CF-10",
+        "CF-12",
+        "CF-15"
+      ],
+      "acceptance_criteria": [
+        "Autenticacion, filtros, fichas, permisos y ausencia de stock/costos/secretos publicos comprobados.",
+        "Fallos criticos resueltos; evidencias, defectos residuales y decision documentados."
+      ],
+      "owner_role_proposed": "QA + equipo implementador",
+      "status": "verified_local",
+      "evidence": [
+        "DESPLIEGUE/docs/PLAN_POR_PROCESOS.md",
+        "DESPLIEGUE/docs/VERIFICACION_V2.md"
+      ],
+      "implementation_summary": "Pruebas de permisos, aislamiento, catalogo, tokens, archivos, CSRF e integridad ejecutadas.",
+      "remaining_acceptance": "No equivale a una auditoria externa de seguridad o cumplimiento."
+    },
+    {
+      "id": "CF-18",
+      "order": 18,
+      "epic": "Liberacion",
+      "title": "Preparar alojamiento, dominio y despliegue revisable",
+      "user_story": {
+        "role": "responsable de la experiencia comercial",
+        "need": "Preparar alojamiento, dominio y despliegue revisable",
+        "benefit": "un catalogo confiable y una operacion trazable sin confundir demostracion y venta"
+      },
+      "priority": "Must",
+      "points_provisional": 5,
+      "proposed_sprint": 4,
+      "dependencies": [
+        "CF-13",
+        "CF-17"
+      ],
+      "acceptance_criteria": [
+        "Configuracion de mismo origen, HTTPS y persistencia probadas en revision.",
+        "Presupuesto y dominio aprobados; procedimiento de version y rollback documentado; publicar solo con autorizacion de lanzamiento."
+      ],
+      "owner_role_proposed": "Equipo implementador + Product Owner",
+      "status": "implemented_with_external_pending",
+      "evidence": [
+        "DESPLIEGUE/docs/PLAN_POR_PROCESOS.md",
+        "DESPLIEGUE/docs/VERIFICACION_V2.md"
+      ],
+      "implementation_summary": "Build de produccion y preparacion Docker/Compose/persistencia/configuracion documentados.",
+      "remaining_acceptance": "Dominio, alojamiento, proxy/TLS y construccion Docker no ejecutados."
+    },
+    {
+      "id": "CF-19",
+      "order": 19,
+      "epic": "Continuidad",
+      "title": "Demostrar backup y restauracion",
+      "user_story": {
+        "role": "responsable de la experiencia comercial",
+        "need": "Demostrar backup y restauracion",
+        "benefit": "un catalogo confiable y una operacion trazable sin confundir demostracion y venta"
+      },
+      "priority": "Must",
+      "points_provisional": 3,
+      "proposed_sprint": 4,
+      "dependencies": [
+        "CF-18"
+      ],
+      "acceptance_criteria": [
+        "Restauracion en entorno separado conserva catalogo y cuentas sinteticas; registrar tiempo y resultado.",
+        "Objetivos iniciales propuestos RPO 24h y RTO 4h aceptados o ajustados; no afirmar logrados sin medir."
+      ],
+      "owner_role_proposed": "Operacion tecnica",
+      "status": "implemented_with_external_pending",
+      "evidence": [
+        "DESPLIEGUE/docs/PLAN_POR_PROCESOS.md",
+        "DESPLIEGUE/docs/VERIFICACION_V2.md"
+      ],
+      "implementation_summary": "Backup consistente y restauracion en archivo separado, integridad y conteos comprobados.",
+      "remaining_acceptance": "Aprobar y medir RPO/RTO operativos y copias remotas/programacion."
+    },
+    {
+      "id": "CF-20",
+      "order": 20,
+      "epic": "Liberacion",
+      "title": "Aceptacion de negocio y decision de salida",
+      "user_story": {
+        "role": "responsable de la experiencia comercial",
+        "need": "Aceptacion de negocio y decision de salida",
+        "benefit": "un catalogo confiable y una operacion trazable sin confundir demostracion y venta"
+      },
+      "priority": "Must",
+      "points_provisional": 3,
+      "proposed_sprint": 4,
+      "dependencies": [
+        "CF-11",
+        "CF-16",
+        "CF-19"
+      ],
+      "acceptance_criteria": [
+        "PO revisa recorrido publico y consulta real de prueba, politicas y costos.",
+        "Decision Go/No-Go registrada con responsable; pendientes bloqueantes impiden venta/publicacion de esa capacidad."
+      ],
+      "owner_role_proposed": "Product Owner",
+      "status": "pending_external_decision",
+      "evidence": [
+        "DESPLIEGUE/docs/PLAN_POR_PROCESOS.md",
+        "DESPLIEGUE/docs/VERIFICACION_V2.md"
+      ],
+      "implementation_summary": "Recorrido revisable preparado para la propietaria.",
+      "remaining_acceptance": "Aceptacion humana y decision Go/No-Go de operacion comercial."
+    },
+    {
+      "id": "CF-21",
+      "order": 21,
+      "epic": "Liberacion",
+      "title": "Ejecutar lanzamiento autorizado y smoke test",
+      "user_story": {
+        "role": "responsable de la experiencia comercial",
+        "need": "Ejecutar lanzamiento autorizado y smoke test",
+        "benefit": "un catalogo confiable y una operacion trazable sin confundir demostracion y venta"
+      },
+      "priority": "Must",
+      "points_provisional": 3,
+      "proposed_sprint": 4,
+      "dependencies": [
+        "CF-20"
+      ],
+      "acceptance_criteria": [
+        "Version aprobada accesible y comprobada con ficha, cuenta y consulta.",
+        "Plan de reversa disponible; no habilitar pagos por publicar el catalogo."
+      ],
+      "owner_role_proposed": "Operacion tecnica",
+      "status": "implemented_with_external_pending",
+      "evidence": [
+        "DESPLIEGUE/docs/PLAN_POR_PROCESOS.md",
+        "DESPLIEGUE/docs/VERIFICACION_V2.md"
+      ],
+      "implementation_summary": "Smoke test de compilados con servidor local; no publicacion externa.",
+      "remaining_acceptance": "Autorizacion y ejecucion de salida publica en dominio real."
+    },
+    {
+      "id": "CF-22",
+      "order": 22,
+      "epic": "Marketing",
+      "title": "Observar piloto y ajustar prioridades",
+      "user_story": {
+        "role": "clienta o responsable del canal",
+        "need": "Observar piloto y ajustar prioridades",
+        "benefit": "un catalogo confiable y una operacion trazable sin confundir demostracion y venta"
+      },
+      "priority": "Must",
+      "points_provisional": 3,
+      "proposed_sprint": 4,
+      "dependencies": [
+        "CF-14",
+        "CF-21"
+      ],
+      "acceptance_criteria": [
+        "Primera semana de seguimiento con consultas, tiempos, incidencias y gasto real si hay campaña autorizada.",
+        "Separar datos de prueba; actualizar backlog por hallazgo y no por supuestas ventas."
+      ],
+      "owner_role_proposed": "Marketing + Product Owner",
+      "status": "pending_external_decision",
+      "evidence": [
+        "DESPLIEGUE/docs/PLAN_POR_PROCESOS.md",
+        "DESPLIEGUE/docs/VERIFICACION_V2.md"
+      ],
+      "implementation_summary": "Tablero listo para capturar actividad local.",
+      "remaining_acceptance": "Observar una semana real de operacion; no puede simularse con tests."
+    },
+    {
+      "id": "CF-23",
+      "order": 23,
+      "epic": "Fase B",
+      "title": "Definir pedidos, pago y conciliacion",
+      "user_story": {
+        "role": "clienta o responsable del canal",
+        "need": "Definir pedidos, pago y conciliacion",
+        "benefit": "un catalogo confiable y una operacion trazable sin confundir demostracion y venta"
+      },
+      "priority": "Could",
+      "points_provisional": 8,
+      "proposed_sprint": null,
+      "dependencies": [
+        "CF-21",
+        "CF-15"
+      ],
+      "acceptance_criteria": [
+        "Flujo, proveedor, idempotencia, conciliacion y casos de pago fallido aprobados.",
+        "No guardar tarjeta; aceptacion de pedidos separada de demo; reestimar antes de implementar."
+      ],
+      "owner_role_proposed": "Product Owner + equipo implementador",
+      "status": "future_scope",
+      "evidence": [
+        "DESPLIEGUE/docs/PLAN_POR_PROCESOS.md",
+        "DESPLIEGUE/docs/VERIFICACION_V2.md"
+      ],
+      "implementation_summary": "Propuestas no equivalen a pedidos/pagos.",
+      "remaining_acceptance": "Fase B: escoger proveedor y aprobar pedidos, pago y conciliacion; no implementados."
+    },
+    {
+      "id": "CF-24",
+      "order": 24,
+      "epic": "Fase B",
+      "title": "Definir inventario y reservas por SKU",
+      "user_story": {
+        "role": "clienta o responsable del canal",
+        "need": "Definir inventario y reservas por SKU",
+        "benefit": "un catalogo confiable y una operacion trazable sin confundir demostracion y venta"
+      },
+      "priority": "Could",
+      "points_provisional": 8,
+      "proposed_sprint": null,
+      "dependencies": [
+        "CF-23"
+      ],
+      "acceptance_criteria": [
+        "Movimiento y reserva evitan sobreventa concurrente.",
+        "Agotamiento/cancelacion libera o ajusta stock con trazabilidad."
+      ],
+      "owner_role_proposed": "Operacion + equipo implementador",
+      "status": "future_scope",
+      "evidence": [
+        "DESPLIEGUE/docs/PLAN_POR_PROCESOS.md",
+        "DESPLIEGUE/docs/VERIFICACION_V2.md"
+      ],
+      "implementation_summary": "Disponibilidad por variante editable; no se simula reserva de venta.",
+      "remaining_acceptance": "Fase B: movimientos/reservas concurrentes y operacion de inventario."
+    },
+    {
+      "id": "CF-25",
+      "order": 25,
+      "epic": "Fase B",
+      "title": "Definir devoluciones, reembolsos y posventa",
+      "user_story": {
+        "role": "clienta o responsable del canal",
+        "need": "Definir devoluciones, reembolsos y posventa",
+        "benefit": "un catalogo confiable y una operacion trazable sin confundir demostracion y venta"
+      },
+      "priority": "Could",
+      "points_provisional": 5,
+      "proposed_sprint": null,
+      "dependencies": [
+        "CF-23"
+      ],
+      "acceptance_criteria": [
+        "Politica aplicada con caso, estado, autorizacion y conciliacion.",
+        "Precio y condiciones del pedido se conservan historicamente."
+      ],
+      "owner_role_proposed": "Atencion + finanzas",
+      "status": "future_scope",
+      "evidence": [
+        "DESPLIEGUE/docs/PLAN_POR_PROCESOS.md",
+        "DESPLIEGUE/docs/VERIFICACION_V2.md"
+      ],
+      "implementation_summary": "Politicas editables y conversaciones de atencion disponibles.",
+      "remaining_acceptance": "Fase B: flujo de devolucion y reembolso sobre pedidos reales."
+    },
+    {
+      "id": "CF-26",
+      "order": 26,
+      "epic": "Crecimiento",
+      "title": "Escalar campañas y CRM con evidencia",
+      "user_story": {
+        "role": "clienta o responsable del canal",
+        "need": "Escalar campañas y CRM con evidencia",
+        "benefit": "un catalogo confiable y una operacion trazable sin confundir demostracion y venta"
+      },
+      "priority": "Could",
+      "points_provisional": 5,
+      "proposed_sprint": null,
+      "dependencies": [
+        "CF-22"
+      ],
+      "acceptance_criteria": [
+        "Costos y calidad permiten aumentar inversion dentro del tope aprobado.",
+        "Consentimiento, exclusiones y medicion de contribucion documentados; sin campañas activadas por defecto."
+      ],
+      "owner_role_proposed": "Marketing",
+      "status": "future_scope",
+      "evidence": [
+        "DESPLIEGUE/docs/PLAN_POR_PROCESOS.md",
+        "DESPLIEGUE/docs/VERIFICACION_V2.md"
+      ],
+      "implementation_summary": "Metricas locales disponibles; no se activaron campañas.",
+      "remaining_acceptance": "Datos de negocio, presupuesto y autorizacion para escalar marketing/CRM."
+    }
+  ],
+  "updated_at": "2026-10-29",
+  "implementation_scope": "Local catalog, account, advisory and administration. Not a claim of commercial/public launch."
+}

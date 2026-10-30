@@ -1,0 +1,105 @@
+{
+  "date": "2026-10-29",
+  "decisions": [
+    {
+      "id": "D01",
+      "question": "Alcance A o B",
+      "proposal": "A propuesto; sin checkout",
+      "selected_option": null,
+      "status": "pending",
+      "owner_role": "Product Owner; designacion pendiente",
+      "approved_by": null,
+      "approved_at": null
+    },
+    {
+      "id": "D02",
+      "question": "Surtido y responsable",
+      "proposal": "8-12 referencias a verificar",
+      "selected_option": null,
+      "status": "pending",
+      "owner_role": "Product Owner; designacion pendiente",
+      "approved_by": null,
+      "approved_at": null
+    },
+    {
+      "id": "D03",
+      "question": "Precio publico/fijo/cotizar",
+      "proposal": "Por variante, aprobado y vigente",
+      "selected_option": null,
+      "status": "pending",
+      "owner_role": "Product Owner; designacion pendiente",
+      "approved_by": null,
+      "approved_at": null
+    },
+    {
+      "id": "D04",
+      "question": "Cobertura y atencion",
+      "proposal": "Una plaza inicial segun capacidad",
+      "selected_option": null,
+      "status": "pending",
+      "owner_role": "Product Owner; designacion pendiente",
+      "approved_by": null,
+      "approved_at": null
+    },
+    {
+      "id": "D05",
+      "question": "Medios para oferta real",
+      "proposal": "Fotografias y permisos por obtener; IA rotulada en demo",
+      "selected_option": null,
+      "status": "pending",
+      "owner_role": "Product Owner; designacion pendiente",
+      "approved_by": null,
+      "approved_at": null
+    },
+    {
+      "id": "D06",
+      "question": "Politicas, privacidad y retencion",
+      "proposal": "Revisar con responsables",
+      "selected_option": null,
+      "status": "pending",
+      "owner_role": "Product Owner; designacion pendiente",
+      "approved_by": null,
+      "approved_at": null
+    },
+    {
+      "id": "D07",
+      "question": "Alojamiento y presupuesto",
+      "proposal": "Seleccionar arquitectura y cotizar",
+      "selected_option": null,
+      "status": "pending",
+      "owner_role": "Product Owner; designacion pendiente",
+      "approved_by": null,
+      "approved_at": null
+    },
+    {
+      "id": "D08",
+      "question": "Continuidad",
+      "proposal": "RPO 24h / RTO 4h propuestos; medir",
+      "selected_option": null,
+      "status": "pending",
+      "owner_role": "Product Owner; designacion pendiente",
+      "approved_by": null,
+      "approved_at": null
+    },
+    {
+      "id": "D09",
+      "question": "Analitica y canales",
+      "proposal": "Eventos minimos sin PII; canal real por configurar",
+      "selected_option": null,
+      "status": "pending",
+      "owner_role": "Product Owner; designacion pendiente",
+      "approved_by": null,
+      "approved_at": null
+    },
+    {
+      "id": "D10",
+      "question": "Autoridad y fecha de salida",
+      "proposal": "Go/No-Go con responsable",
+      "selected_option": null,
+      "status": "pending",
+      "owner_role": "Product Owner; designacion pendiente",
+      "approved_by": null,
+      "approved_at": null
+    }
+  ]
+}

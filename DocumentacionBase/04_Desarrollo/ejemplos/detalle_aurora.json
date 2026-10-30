@@ -1,0 +1,50 @@
+{
+  "id": 1,
+  "sku": "CF-DEMO-001",
+  "slug": "anillo-aurora",
+  "name": "Anillo Aurora",
+  "category": "anillos",
+  "material": "Oro amarillo",
+  "price_mxn": 38900,
+  "currency": "MXN",
+  "is_demo": true,
+  "image": null,
+  "availability": "in_stock",
+  "description": "Un solitario de líneas limpias y proporciones delicadas. Una pieza pensada para acompañar un logro o una promesa personal.",
+  "metal_karat": 18,
+  "metal_fineness": 750,
+  "stone_type": "Diamante",
+  "stone_origin": "natural",
+  "stone_details": "Ejemplo de diseño; corte, color, claridad, tratamientos, origen y graduación por verificar con proveedor. No inferir calidad por fotografía.",
+  "stone_carat_total": 0.3,
+  "weight_g": 2.8,
+  "measurements": "Aro 2 mm; centro 4.3 mm; talla de referencia US 6.",
+  "images": [],
+  "video_url": null,
+  "certificate_status": "pending_verification",
+  "certificates": [],
+  "care": "Limpiar con paño suave; evitar cloro, perfumes y abrasivos; guardar separada. Ajustar las instrucciones al metal, tratamientos y gema de cada pieza.",
+  "warranty": "Borrador: cobertura por defectos de fabricación; vigencia, exclusiones y proceso pendientes de aprobación. No constituye una garantía comercial vigente.",
+  "shipping_policy": "Demostración: costo y plazo se cotizan por código postal; seguro, cobertura, transportista y responsable pendientes de aprobación.",
+  "returns_policy": "Política pendiente de aprobación para productos estándar y personalizados. No publicar plazos ficticios.",
+  "collections": [
+    "novedades",
+    "oro-18k",
+    "diamantes-naturales"
+  ],
+  "intention_optional": "Celebrar un momento",
+  "policies_status": "draft",
+  "delivery_estimate": "3–5 días hábiles después de confirmar pago; dato ficticio.",
+  "variants": [
+    {
+      "sku": "CF-DEMO-001-US6",
+      "label": "US 6",
+      "availability": "in_stock"
+    },
+    {
+      "sku": "CF-DEMO-001-US7",
+      "label": "US 7",
+      "availability": "in_stock"
+    }
+  ]
+}

@@ -1,0 +1,197 @@
+[
+  {
+    "file": "01_Marca/Descripcion_para_copiar.txt",
+    "bytes": 651,
+    "sha256": "e886fbf254e61bf148a74d173dd2085a1cb01e577434d6cae2128df729dd1942"
+  },
+  {
+    "file": "01_Marca/Identidad_de_marca.md",
+    "bytes": 5204,
+    "sha256": "0cf5f59194db297bbe4851e2436bc1215bd0193d72ba84ada73455c35170bf9e"
+  },
+  {
+    "file": "01_Marca/design_tokens.json",
+    "bytes": 1305,
+    "sha256": "b1eafa29926d83a67b073fca4dd49a51fe97ef596b2d8dd13f475e33b8c2d172"
+  },
+  {
+    "file": "01_Marca/tokens.css",
+    "bytes": 341,
+    "sha256": "94316d49f6660572ce10535b90ac47329efd7a4ac63248eafb19992bfe53964b"
+  },
+  {
+    "file": "02_Catalogo/Catalogo_descriptivo.md",
+    "bytes": 18745,
+    "sha256": "732c55447bccc0687f9545b868ced4b739dc8c3343152db724729035d827920d"
+  },
+  {
+    "file": "02_Catalogo/Descripciones_para_copiar.txt",
+    "bytes": 2183,
+    "sha256": "b135b83f804ba8b122e5c0d2e14b1d1f745786c22973301275e8c8c8d561a949"
+  },
+  {
+    "file": "02_Catalogo/categorias.json",
+    "bytes": 212,
+    "sha256": "2ea33a6e239486379ee697ec6030aece2331ea977107904408f79df5d61b53ee"
+  },
+  {
+    "file": "02_Catalogo/colecciones.json",
+    "bytes": 606,
+    "sha256": "41d511f9c9bc719eb50f90aeba7fdf0e8b0b52f04cea0155afd95e908d8e2a11"
+  },
+  {
+    "file": "02_Catalogo/productos_demo.csv",
+    "bytes": 5075,
+    "sha256": "e708b5b1edaf4de7d22080b69e709be8782f663bb4aab28a460a7da9b6aead30"
+  },
+  {
+    "file": "02_Catalogo/productos_demo.json",
+    "bytes": 31955,
+    "sha256": "1ddae6ebd07cd1257e95d26d1f84a527c048c5d2190b8f55deceb799d33a2afc"
+  },
+  {
+    "file": "03_UX/Pantallas_y_flujos.md",
+    "bytes": 5948,
+    "sha256": "439284f81e81c4d52ad5a564bdb991362527171066b0e0c1bf4acb466a5f5654"
+  },
+  {
+    "file": "04_Desarrollo/Backlog.csv",
+    "bytes": 2596,
+    "sha256": "5ea117314ce3af48339b1c5df8904c0a57ece29da9ffe4defba0542fa5ee3f72"
+  },
+  {
+    "file": "04_Desarrollo/Diccionario_de_datos.csv",
+    "bytes": 1568,
+    "sha256": "36a73a0dd6566aa31243d210102aae634fcd351a027ac7909493255bb320be99"
+  },
+  {
+    "file": "04_Desarrollo/Guia_de_implementacion.md",
+    "bytes": 4774,
+    "sha256": "aa1e30b27b4d2a31bc3316f307ab1fe5da33549758dca32c9090bdb13f4972ee"
+  },
+  {
+    "file": "04_Desarrollo/Mapeo_fixtures.md",
+    "bytes": 1382,
+    "sha256": "e09fb9067326a3b9bd5b03e397f029698d4610679a620ce766e5b02c11527b2a"
+  },
+  {
+    "file": "04_Desarrollo/Solicitudes_de_ejemplo.http",
+    "bytes": 1338,
+    "sha256": "dcaa14d50fd14287b1fffeb1110a2de65e76e96e1e6da3ec6d75871d1dfad7cc"
+  },
+  {
+    "file": "04_Desarrollo/ejemplos/detalle_aurora.json",
+    "bytes": 1991,
+    "sha256": "2db55161a91e6f2da18800f7b0303f4fbc0aeafe3b4041c21cdbb2ce55f534d1"
+  },
+  {
+    "file": "04_Desarrollo/ejemplos/lista_pagina_1.json",
+    "bytes": 711,
+    "sha256": "66614f59c538257600dec541f68b232e365e0e3cb4202fe06d294521470f81d7"
+  },
+  {
+    "file": "04_Desarrollo/openapi.yaml",
+    "bytes": 13781,
+    "sha256": "c7eae53e85b771acbf2867ab4896e67447abc62c740e7c68e4d7a7c09b7dda55"
+  },
+  {
+    "file": "05_Validacion/Casos_de_prueba.csv",
+    "bytes": 4072,
+    "sha256": "4b7caab2920fccaf39348f0e537523fc5642eea37ef4f7d1c6fca041f70e84a5"
+  },
+  {
+    "file": "05_Validacion/Lista_de_liberacion.md",
+    "bytes": 1356,
+    "sha256": "5340e70a90de56802f1fe2ff541fe9366ed97e80665fbfafc236215e8c5559c6"
+  },
+  {
+    "file": "05_Validacion/Verificacion_del_paquete.md",
+    "bytes": 724,
+    "sha256": "020935ca72a24a56bfb06d36ca780fb73d14569595b43fd9349c2a6680dda666"
+  },
+  {
+    "file": "06_Visuales/01_Identidad_de_marca.png",
+    "bytes": 2003588,
+    "sha256": "262ff94cf5e225a434aee42a07666af6cab61b1174ae51fca9dc09684a375400"
+  },
+  {
+    "file": "06_Visuales/02_Pagina_inicial.png",
+    "bytes": 1861263,
+    "sha256": "dc2812c80cdeefe6aed0ab5b1ed2f9618e42862f76b10c10cff42b9adc66a7b3"
+  },
+  {
+    "file": "06_Visuales/03_Ficha_de_producto.png",
+    "bytes": 1763500,
+    "sha256": "abf2aacdcd2a73b98bae4e2078aac07a31db2f008f4028cd8def29bbda374ae6"
+  },
+  {
+    "file": "06_Visuales/Notas_de_uso.md",
+    "bytes": 773,
+    "sha256": "0fcbe249dc578b90fb5cedffe6989c8234faede8c99d2f906a2b720a0079467f"
+  },
+  {
+    "file": "06_Visuales/logo_reconstruccion_no_maestro.png",
+    "bytes": 243057,
+    "sha256": "48dd06b88e8ec086311bc8b3ca97e64b20a1d9fd1092ab4c5dfba35c568e50db"
+  },
+  {
+    "file": "06_Visuales/logo_referencia_fondo_blanco.png",
+    "bytes": 1068801,
+    "sha256": "7bc603d3c346a87e232f073c5e689f5d2c09322d5a63a2e357f2aa494ce6f6ce"
+  },
+  {
+    "file": "07_Referencias/Fuentes_y_trazabilidad.md",
+    "bytes": 1722,
+    "sha256": "681b4f6cbf5f6f29ef4e2a1c0c37427289732e1b8845d0e6269a417966f79b06"
+  },
+  {
+    "file": "07_Referencias/actividades_requeridas.png",
+    "bytes": 99213,
+    "sha256": "5691ae7ed62c8f7f4adfc1e878e5ef434b293b57d6a78b14724dc364641d59ce"
+  },
+  {
+    "file": "07_Referencias/audio_original_no_transcrito.ogg",
+    "bytes": 115483,
+    "sha256": "223182865f6154c4d6fdea7f87c7536d956ba63ecbaca6c3b93181a8e22dbdd7"
+  },
+  {
+    "file": "07_Referencias/bolsa_logo_original.jpg",
+    "bytes": 118446,
+    "sha256": "d483655a760c7dfd79411e3ed5033d4474af2a738a8eb9e5b0ddc2fe8bc87bdd"
+  },
+  {
+    "file": "07_Referencias/brief_propietario.jpeg",
+    "bytes": 71934,
+    "sha256": "2b2fbbf1709a3b9644a338a5c80837f8bc032db570d5be9fd66596ed83ca2177"
+  },
+  {
+    "file": "07_Referencias/ficha_propietario.jpeg",
+    "bytes": 103030,
+    "sha256": "4541534adfa9b16afb656c9fd98099c77d27ece32102b9167da99cc5d622f7a0"
+  },
+  {
+    "file": "07_Referencias/navegacion_propietario.jpeg",
+    "bytes": 55574,
+    "sha256": "5f30db62c024e152afa95eafe8740b9b2d6f884e87afea542ae9d974ac513d3e"
+  },
+  {
+    "file": "Guia_integrada.docx",
+    "bytes": 47574,
+    "sha256": "cbe6f6c76826d50446d2f64fce5ba3707a29c25f43d4a9c32d8280f33a2e814e"
+  },
+  {
+    "file": "Guia_integrada.pdf",
+    "bytes": 238955,
+    "sha256": "98c323ce51c37be65cea639d1e2e1eae86792152f2537b0bcab974966011e10d"
+  },
+  {
+    "file": "LEEME.md",
+    "bytes": 2453,
+    "sha256": "c86a3123097e466d69b43dc797a9e497fc343afb69327dc2fa44c2bb1e7fc397"
+  },
+  {
+    "file": "PROMPT_PARA_VISUAL_STUDIO.txt",
+    "bytes": 12304,
+    "sha256": "9ad3c1c5e4cd56ef94abd0ddbddae9d8e2780b5c1791757ae2df20b15bedd540"
+  }
+]

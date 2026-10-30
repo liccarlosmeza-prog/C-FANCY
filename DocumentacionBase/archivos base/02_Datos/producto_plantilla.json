@@ -1,0 +1,76 @@
+{
+  "template_status": "incomplete_not_publishable",
+  "id": null,
+  "slug": null,
+  "name": null,
+  "description": null,
+  "category_id": null,
+  "material_id": null,
+  "weight_g": null,
+  "measurements": {
+    "width_mm": null,
+    "height_mm": null,
+    "length_mm": null,
+    "display_summary": null
+  },
+  "is_demo": true,
+  "publication_status": "draft",
+  "verification_status": "pending",
+  "stone_groups": [],
+  "collection_ids": [],
+  "variants": [
+    {
+      "sku": null,
+      "label": null,
+      "size_system": null,
+      "size_value": null,
+      "price": {
+        "mode": "demo",
+        "amount_minor": null,
+        "currency": "MXN",
+        "tax_display_rule": null,
+        "approved_by": null,
+        "valid_from": null
+      },
+      "availability": {
+        "status": "unknown",
+        "lead_time_min_days": null,
+        "lead_time_max_days": null,
+        "verified_at": null
+      }
+    }
+  ],
+  "media": [
+    {
+      "view": "front",
+      "path": null,
+      "source_kind": null,
+      "alt": null,
+      "rights_reference": null,
+      "approved": false
+    },
+    {
+      "view": "side",
+      "path": null,
+      "source_kind": null,
+      "alt": null,
+      "rights_reference": null,
+      "approved": false
+    },
+    {
+      "view": "detail",
+      "path": null,
+      "source_kind": null,
+      "alt": null,
+      "rights_reference": null,
+      "approved": false
+    }
+  ],
+  "certificate_status": "pending",
+  "care": null,
+  "warranty_policy_version_id": null,
+  "shipping_policy_version_id": null,
+  "returns_policy_version_id": null,
+  "verified_by": null,
+  "verified_at": null
+}

@@ -1,0 +1,38 @@
+[
+  {
+    "id": "novedades",
+    "name": "Novedades"
+  },
+  {
+    "id": "oro-18k",
+    "name": "Oro 18K"
+  },
+  {
+    "id": "diamantes-naturales",
+    "name": "Diamantes Naturales"
+  },
+  {
+    "id": "diamantes-de-laboratorio",
+    "name": "Diamantes De Laboratorio"
+  },
+  {
+    "id": "plata-925",
+    "name": "Plata 925"
+  },
+  {
+    "id": "gemas-preciosas",
+    "name": "Gemas Preciosas"
+  },
+  {
+    "id": "alta-joyeria",
+    "name": "Alta Joyeria"
+  },
+  {
+    "id": "piezas-personalizadas",
+    "name": "Piezas Personalizadas"
+  },
+  {
+    "id": "con-significado",
+    "name": "Con Significado"
+  }
+]

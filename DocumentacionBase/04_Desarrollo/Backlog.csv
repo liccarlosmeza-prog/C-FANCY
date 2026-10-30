@@ -1,0 +1,15 @@
+﻿historia,id,tarea,criterio_de_aceptacion,documento,dependencia,estado
+H1,T01,"Diseñar pantallas de registro, inicio y cierre de sesión","Pantallas, estados, responsive y foco definidos",03_UX/Pantallas_y_flujos.md,Sin dependencia,especificado_no_implementado
+H1,T02,Crear formularios con validación de campos,Cliente y servidor aplican límites; errores accesibles; doble envío bloqueado,03_UX/Pantallas_y_flujos.md,T01,especificado_no_implementado
+H1,T03,Desarrollar API de registro y login con sesión,Hash Argon2id y sesión de servidor; no cifrado reversible de contraseñas,04_Desarrollo/openapi.yaml,T02,especificado_no_implementado
+H1,T04,Probar autenticación y cierre de sesión,"Credenciales válidas, inválidas, expiración y logout cubiertos",05_Validacion/Casos_de_prueba.csv,T03,especificado_no_implementado
+H2,T05,Cargar categorías y productos de prueba,4 tipos y 10 registros is_demo sin publicar en producción,02_Catalogo/productos_demo.json,Sin dependencia,especificado_no_implementado
+H2,T06,Desarrollar API de categorías y listado paginado,Contrato y metadatos total/page/page_size/total_pages; orden estable,04_Desarrollo/openapi.yaml,T05,especificado_no_implementado
+H2,T07,Construir menú y cuadrícula,"Cards con imagen, nombre, precio y categorías; URL conserva filtros",03_UX/Pantallas_y_flujos.md,T06,especificado_no_implementado
+H2,T08,Probar catálogo y responsive,"360/768/1280 px; paginación, vacío y red fallida",05_Validacion/Casos_de_prueba.csv,T07,especificado_no_implementado
+H3,T09,Desarrollar API de búsqueda y filtros,"Nombre, categoría y precio con AND; validación y orden estable",04_Desarrollo/openapi.yaml,T06,especificado_no_implementado
+H3,T10,Crear búsqueda y filtros con estado vacío,"Entrada conservada, reset de página, limpiar filtros y foco móvil",03_UX/Pantallas_y_flujos.md,T09,especificado_no_implementado
+H3,T11,"Probar búsqueda, filtros y rendimiento","Acentos, combinación, rango inválido, carga y peticiones fuera de orden",05_Validacion/Casos_de_prueba.csv,T10,especificado_no_implementado
+H4,T12,Desarrollar API de detalle,"Slug, variantes y metadatos completos; 404 para ocultos/inexistentes",04_Desarrollo/openapi.yaml,T05,especificado_no_implementado
+H4,T13,Construir página de detalle,16 requisitos del propietario y CTA de asesoría; variantes/stock visibles,03_UX/Pantallas_y_flujos.md,T12,especificado_no_implementado
+H4,T14,Probar detalle de producto,"Ficha, variantes, agotado, bajo pedido, 404 y navegación accesible",05_Validacion/Casos_de_prueba.csv,T13,especificado_no_implementado

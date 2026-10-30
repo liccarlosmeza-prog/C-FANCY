@@ -1,0 +1,1077 @@
+{
+  "version": "1.0",
+  "status": "logical_design_only",
+  "phase": "A",
+  "entities": [
+    {
+      "entity": "users",
+      "purpose": "Cuenta propia",
+      "keys": [
+        "id PK",
+        "email_normalized UNIQUE"
+      ],
+      "relations": [],
+      "fields": [
+        {
+          "name": "id",
+          "logical_type": "id",
+          "required": true,
+          "visibility": "restricted",
+          "rule": "estable"
+        },
+        {
+          "name": "email_normalized",
+          "logical_type": "string",
+          "required": true,
+          "visibility": "restricted",
+          "rule": "unico; normalizado"
+        },
+        {
+          "name": "name",
+          "logical_type": "string",
+          "required": true,
+          "visibility": "restricted",
+          "rule": "2-100 caracteres; mostrar solo en cuenta propia"
+        },
+        {
+          "name": "password_hash",
+          "logical_type": "string",
+          "required": true,
+          "visibility": "restricted",
+          "rule": "Argon2id; nunca exponer"
+        },
+        {
+          "name": "created_at",
+          "logical_type": "instant",
+          "required": true,
+          "visibility": "internal",
+          "rule": "ISO 8601"
+        }
+      ]
+    },
+    {
+      "entity": "sessions",
+      "purpose": "Sesiones opacas",
+      "keys": [
+        "token_hash PK"
+      ],
+      "relations": [
+        "user_id -> users.id"
+      ],
+      "fields": [
+        {
+          "name": "token_hash",
+          "logical_type": "string",
+          "required": true,
+          "visibility": "restricted",
+          "rule": "guardar hash; cookie solo navegador"
+        },
+        {
+          "name": "user_id",
+          "logical_type": "id",
+          "required": false,
+          "visibility": "restricted",
+          "rule": "null para pre-sesion"
+        },
+        {
+          "name": "csrf_secret",
+          "logical_type": "string",
+          "required": true,
+          "visibility": "restricted",
+          "rule": "rotar al autenticar"
+        },
+        {
+          "name": "created_at",
+          "logical_type": "instant",
+          "required": true,
+          "visibility": "internal",
+          "rule": "expiracion absoluta"
+        },
+        {
+          "name": "last_seen_at",
+          "logical_type": "instant",
+          "required": true,
+          "visibility": "internal",
+          "rule": "expiracion por inactividad"
+        }
+      ]
+    },
+    {
+      "entity": "categories",
+      "purpose": "Tipo de joya",
+      "keys": [
+        "id PK"
+      ],
+      "relations": [],
+      "fields": [
+        {
+          "name": "id",
+          "logical_type": "slug",
+          "required": true,
+          "visibility": "public_when_approved",
+          "rule": "estable"
+        },
+        {
+          "name": "name",
+          "logical_type": "string",
+          "required": true,
+          "visibility": "public_when_approved",
+          "rule": "etiqueta visible"
+        },
+        {
+          "name": "active",
+          "logical_type": "boolean",
+          "required": true,
+          "visibility": "internal",
+          "rule": "no eliminar si tiene referencias"
+        }
+      ]
+    },
+    {
+      "entity": "materials",
+      "purpose": "Metal verificado",
+      "keys": [
+        "id PK"
+      ],
+      "relations": [],
+      "fields": [
+        {
+          "name": "id",
+          "logical_type": "slug",
+          "required": true,
+          "visibility": "public_when_approved",
+          "rule": "estable"
+        },
+        {
+          "name": "metal",
+          "logical_type": "enum",
+          "required": true,
+          "visibility": "public_when_approved",
+          "rule": "gold/silver"
+        },
+        {
+          "name": "color",
+          "logical_type": "enum",
+          "required": true,
+          "visibility": "public_when_approved",
+          "rule": "yellow/white/rose/silver"
+        },
+        {
+          "name": "karat",
+          "logical_type": "decimal",
+          "required": false,
+          "visibility": "public_when_approved",
+          "rule": "solo metal aplicable"
+        },
+        {
+          "name": "fineness",
+          "logical_type": "integer",
+          "required": true,
+          "visibility": "public_when_approved",
+          "rule": "0-1000; fuente requerida"
+        },
+        {
+          "name": "verification_status",
+          "logical_type": "enum",
+          "required": true,
+          "visibility": "internal",
+          "rule": "pending/approved/rejected"
+        }
+      ]
+    },
+    {
+      "entity": "collections",
+      "purpose": "Curaduria",
+      "keys": [
+        "id PK"
+      ],
+      "relations": [],
+      "fields": [
+        {
+          "name": "id",
+          "logical_type": "slug",
+          "required": true,
+          "visibility": "public_when_approved",
+          "rule": "estable"
+        },
+        {
+          "name": "name",
+          "logical_type": "string",
+          "required": true,
+          "visibility": "public_when_approved",
+          "rule": "etiqueta"
+        },
+        {
+          "name": "active",
+          "logical_type": "boolean",
+          "required": true,
+          "visibility": "internal",
+          "rule": "intenciones desactivada inicialmente"
+        }
+      ]
+    },
+    {
+      "entity": "products",
+      "purpose": "Ficha maestra",
+      "keys": [
+        "id PK",
+        "slug UNIQUE"
+      ],
+      "relations": [
+        "category_id -> categories.id",
+        "material_id -> materials.id"
+      ],
+      "fields": [
+        {
+          "name": "id",
+          "logical_type": "id",
+          "required": true,
+          "visibility": "public_when_approved",
+          "rule": "estable"
+        },
+        {
+          "name": "slug",
+          "logical_type": "slug",
+          "required": true,
+          "visibility": "public_when_approved",
+          "rule": "unico"
+        },
+        {
+          "name": "name",
+          "logical_type": "string",
+          "required": true,
+          "visibility": "public_when_approved",
+          "rule": "nombre real aprobado"
+        },
+        {
+          "name": "description",
+          "logical_type": "text",
+          "required": true,
+          "visibility": "public_when_approved",
+          "rule": "sin promesas no verificadas"
+        },
+        {
+          "name": "category_id",
+          "logical_type": "slug",
+          "required": true,
+          "visibility": "public_when_approved",
+          "rule": "tipo principal"
+        },
+        {
+          "name": "material_id",
+          "logical_type": "slug",
+          "required": true,
+          "visibility": "public_when_approved",
+          "rule": "material verificado"
+        },
+        {
+          "name": "weight_g",
+          "logical_type": "decimal",
+          "required": true,
+          "visibility": "public_when_approved",
+          "rule": "positivo; precision y tolerancia documentadas"
+        },
+        {
+          "name": "measurements",
+          "logical_type": "object",
+          "required": true,
+          "visibility": "public_when_approved",
+          "rule": "dimensiones numericas mm y resumen visible"
+        },
+        {
+          "name": "publication_status",
+          "logical_type": "enum",
+          "required": true,
+          "visibility": "internal",
+          "rule": "draft/review/published/archived/demo_only"
+        },
+        {
+          "name": "is_demo",
+          "logical_type": "boolean",
+          "required": true,
+          "visibility": "public_when_approved",
+          "rule": "true excluye produccion"
+        },
+        {
+          "name": "verification_status",
+          "logical_type": "enum",
+          "required": true,
+          "visibility": "internal",
+          "rule": "approved no implica publicado"
+        },
+        {
+          "name": "verified_by",
+          "logical_type": "id",
+          "required": false,
+          "visibility": "internal",
+          "rule": "actor aprobador"
+        },
+        {
+          "name": "verified_at",
+          "logical_type": "instant",
+          "required": false,
+          "visibility": "internal",
+          "rule": "obligatorio al aprobar"
+        },
+        {
+          "name": "legacy_demo_id",
+          "logical_type": "integer",
+          "required": false,
+          "visibility": "internal",
+          "rule": "solo trazabilidad de fixtures"
+        }
+      ]
+    },
+    {
+      "entity": "product_collections",
+      "purpose": "Relacion sin duplicar",
+      "keys": [
+        "product_id + collection_id PK"
+      ],
+      "relations": [
+        "product_id -> products.id",
+        "collection_id -> collections.id"
+      ],
+      "fields": [
+        {
+          "name": "product_id",
+          "logical_type": "id",
+          "required": true,
+          "visibility": "public_when_approved",
+          "rule": "producto existente"
+        },
+        {
+          "name": "collection_id",
+          "logical_type": "slug",
+          "required": true,
+          "visibility": "public_when_approved",
+          "rule": "coleccion existente"
+        }
+      ]
+    },
+    {
+      "entity": "variants",
+      "purpose": "SKU y opciones",
+      "keys": [
+        "id PK",
+        "sku UNIQUE"
+      ],
+      "relations": [
+        "product_id -> products.id"
+      ],
+      "fields": [
+        {
+          "name": "id",
+          "logical_type": "id",
+          "required": true,
+          "visibility": "public_when_approved",
+          "rule": "estable"
+        },
+        {
+          "name": "product_id",
+          "logical_type": "id",
+          "required": true,
+          "visibility": "public_when_approved",
+          "rule": "padre"
+        },
+        {
+          "name": "sku",
+          "logical_type": "string",
+          "required": true,
+          "visibility": "public_when_approved",
+          "rule": "unico"
+        },
+        {
+          "name": "label",
+          "logical_type": "string",
+          "required": true,
+          "visibility": "public_when_approved",
+          "rule": "descripcion de variante"
+        },
+        {
+          "name": "size_system",
+          "logical_type": "enum",
+          "required": true,
+          "visibility": "public_when_approved",
+          "rule": "US_ring/length_cm/pair/custom"
+        },
+        {
+          "name": "size_value",
+          "logical_type": "string",
+          "required": false,
+          "visibility": "public_when_approved",
+          "rule": "valor en sistema declarado"
+        },
+        {
+          "name": "active",
+          "logical_type": "boolean",
+          "required": true,
+          "visibility": "internal",
+          "rule": "sin borrar historico"
+        }
+      ]
+    },
+    {
+      "entity": "product_stones",
+      "purpose": "Grupos de gema",
+      "keys": [
+        "id PK"
+      ],
+      "relations": [
+        "product_id -> products.id"
+      ],
+      "fields": [
+        {
+          "name": "id",
+          "logical_type": "id",
+          "required": true,
+          "visibility": "internal",
+          "rule": "estable"
+        },
+        {
+          "name": "product_id",
+          "logical_type": "id",
+          "required": true,
+          "visibility": "internal",
+          "rule": "padre"
+        },
+        {
+          "name": "stone_type",
+          "logical_type": "enum",
+          "required": true,
+          "visibility": "public_when_approved",
+          "rule": "diamond/sapphire/emerald"
+        },
+        {
+          "name": "formation_origin",
+          "logical_type": "enum",
+          "required": true,
+          "visibility": "public_when_approved",
+          "rule": "natural/laboratory/unknown"
+        },
+        {
+          "name": "carat_total",
+          "logical_type": "decimal",
+          "required": false,
+          "visibility": "public_when_approved",
+          "rule": "ct; no k"
+        },
+        {
+          "name": "quantity",
+          "logical_type": "integer",
+          "required": false,
+          "visibility": "public_when_approved",
+          "rule": "positivo si se conoce"
+        },
+        {
+          "name": "cut",
+          "logical_type": "string",
+          "required": false,
+          "visibility": "public_when_approved",
+          "rule": "solo verificado"
+        },
+        {
+          "name": "color",
+          "logical_type": "string",
+          "required": false,
+          "visibility": "public_when_approved",
+          "rule": "no asignar grado inexistente"
+        },
+        {
+          "name": "clarity",
+          "logical_type": "string",
+          "required": false,
+          "visibility": "public_when_approved",
+          "rule": "grado solo con evidencia"
+        },
+        {
+          "name": "treatment_status",
+          "logical_type": "enum",
+          "required": true,
+          "visibility": "public_when_approved",
+          "rule": "desconocido no equivale a sin tratamiento"
+        },
+        {
+          "name": "evidence_reference",
+          "logical_type": "string",
+          "required": false,
+          "visibility": "internal",
+          "rule": "documento real"
+        }
+      ]
+    },
+    {
+      "entity": "media_assets",
+      "purpose": "Vistas y derechos",
+      "keys": [
+        "id PK"
+      ],
+      "relations": [
+        "product_id -> products.id"
+      ],
+      "fields": [
+        {
+          "name": "id",
+          "logical_type": "id",
+          "required": true,
+          "visibility": "internal",
+          "rule": "estable"
+        },
+        {
+          "name": "product_id",
+          "logical_type": "id",
+          "required": true,
+          "visibility": "internal",
+          "rule": "padre"
+        },
+        {
+          "name": "path",
+          "logical_type": "string",
+          "required": true,
+          "visibility": "public_when_approved",
+          "rule": "archivo existente"
+        },
+        {
+          "name": "view",
+          "logical_type": "enum",
+          "required": true,
+          "visibility": "public_when_approved",
+          "rule": "front/side/detail/scale/clasp/packaging"
+        },
+        {
+          "name": "source_kind",
+          "logical_type": "enum",
+          "required": true,
+          "visibility": "public_when_approved",
+          "rule": "ai_generated/product_photo/product_video"
+        },
+        {
+          "name": "alt",
+          "logical_type": "string",
+          "required": true,
+          "visibility": "public_when_approved",
+          "rule": "pieza, vista y naturaleza del medio"
+        },
+        {
+          "name": "crop_panel",
+          "logical_type": "integer",
+          "required": false,
+          "visibility": "internal",
+          "rule": "0/1/2 para triptico IA"
+        },
+        {
+          "name": "rights_reference",
+          "logical_type": "string",
+          "required": true,
+          "visibility": "internal",
+          "rule": "permiso o registro de procedencia"
+        },
+        {
+          "name": "approved",
+          "logical_type": "boolean",
+          "required": true,
+          "visibility": "internal",
+          "rule": "aprobacion editorial"
+        }
+      ]
+    },
+    {
+      "entity": "certificates",
+      "purpose": "Documentos verificados",
+      "keys": [
+        "id PK"
+      ],
+      "relations": [
+        "product_id -> products.id",
+        "variant_id -> variants.id"
+      ],
+      "fields": [
+        {
+          "name": "id",
+          "logical_type": "id",
+          "required": true,
+          "visibility": "internal",
+          "rule": "estable"
+        },
+        {
+          "name": "product_id",
+          "logical_type": "id",
+          "required": true,
+          "visibility": "internal",
+          "rule": "padre"
+        },
+        {
+          "name": "variant_id",
+          "logical_type": "id",
+          "required": false,
+          "visibility": "internal",
+          "rule": "si aplica a variante"
+        },
+        {
+          "name": "status",
+          "logical_type": "enum",
+          "required": true,
+          "visibility": "public_when_approved",
+          "rule": "not_applicable/pending/verified"
+        },
+        {
+          "name": "issuer",
+          "logical_type": "string",
+          "required": false,
+          "visibility": "public_when_approved",
+          "rule": "obligatorio si verified"
+        },
+        {
+          "name": "reference",
+          "logical_type": "string",
+          "required": false,
+          "visibility": "public_when_approved",
+          "rule": "real, nunca generado"
+        },
+        {
+          "name": "document_path",
+          "logical_type": "string",
+          "required": false,
+          "visibility": "restricted",
+          "rule": "acceso publico solo con permiso"
+        },
+        {
+          "name": "verified_at",
+          "logical_type": "instant",
+          "required": false,
+          "visibility": "internal",
+          "rule": "obligatorio si verified"
+        }
+      ]
+    },
+    {
+      "entity": "prices",
+      "purpose": "Precio versionado",
+      "keys": [
+        "id PK"
+      ],
+      "relations": [
+        "variant_id -> variants.id"
+      ],
+      "fields": [
+        {
+          "name": "id",
+          "logical_type": "id",
+          "required": true,
+          "visibility": "internal",
+          "rule": "estable"
+        },
+        {
+          "name": "variant_id",
+          "logical_type": "id",
+          "required": true,
+          "visibility": "internal",
+          "rule": "padre"
+        },
+        {
+          "name": "mode",
+          "logical_type": "enum",
+          "required": true,
+          "visibility": "public_when_approved",
+          "rule": "fixed/quote/demo"
+        },
+        {
+          "name": "amount_minor",
+          "logical_type": "integer",
+          "required": false,
+          "visibility": "public_when_approved",
+          "rule": "centavos; requerido en fixed/demo; no negativo"
+        },
+        {
+          "name": "currency",
+          "logical_type": "enum",
+          "required": true,
+          "visibility": "public_when_approved",
+          "rule": "MXN inicial"
+        },
+        {
+          "name": "tax_display_rule",
+          "logical_type": "string",
+          "required": true,
+          "visibility": "public_when_approved",
+          "rule": "aprobada por responsable fiscal"
+        },
+        {
+          "name": "valid_from",
+          "logical_type": "instant",
+          "required": true,
+          "visibility": "internal",
+          "rule": "inicio vigencia"
+        },
+        {
+          "name": "valid_to",
+          "logical_type": "instant",
+          "required": false,
+          "visibility": "internal",
+          "rule": "mayor a inicio; sin solapamiento"
+        },
+        {
+          "name": "approved_by",
+          "logical_type": "id",
+          "required": false,
+          "visibility": "internal",
+          "rule": "requerido precio comercial"
+        },
+        {
+          "name": "source_cost_reference",
+          "logical_type": "string",
+          "required": false,
+          "visibility": "restricted",
+          "rule": "documento interno; no publico"
+        }
+      ]
+    },
+    {
+      "entity": "availability",
+      "purpose": "Estado comercial",
+      "keys": [
+        "variant_id PK"
+      ],
+      "relations": [
+        "variant_id -> variants.id"
+      ],
+      "fields": [
+        {
+          "name": "variant_id",
+          "logical_type": "id",
+          "required": true,
+          "visibility": "internal",
+          "rule": "un registro vigente por variante"
+        },
+        {
+          "name": "status",
+          "logical_type": "enum",
+          "required": true,
+          "visibility": "public_when_approved",
+          "rule": "in_stock/out_of_stock/made_to_order/unknown"
+        },
+        {
+          "name": "lead_time_min_days",
+          "logical_type": "integer",
+          "required": false,
+          "visibility": "public_when_approved",
+          "rule": "no negativo"
+        },
+        {
+          "name": "lead_time_max_days",
+          "logical_type": "integer",
+          "required": false,
+          "visibility": "public_when_approved",
+          "rule": "mayor o igual a minimo"
+        },
+        {
+          "name": "day_basis",
+          "logical_type": "enum",
+          "required": false,
+          "visibility": "public_when_approved",
+          "rule": "business/calendar"
+        },
+        {
+          "name": "verified_at",
+          "logical_type": "instant",
+          "required": false,
+          "visibility": "internal",
+          "rule": "necesario antes de prometer"
+        },
+        {
+          "name": "source_reference",
+          "logical_type": "string",
+          "required": false,
+          "visibility": "internal",
+          "rule": "operacion o proveedor"
+        }
+      ]
+    },
+    {
+      "entity": "advisory_requests",
+      "purpose": "Seguimiento privado",
+      "keys": [
+        "id PK"
+      ],
+      "relations": [
+        "user_id -> users.id",
+        "product_id -> products.id",
+        "variant_id -> variants.id"
+      ],
+      "fields": [
+        {
+          "name": "id",
+          "logical_type": "id",
+          "required": true,
+          "visibility": "restricted",
+          "rule": "estable"
+        },
+        {
+          "name": "user_id",
+          "logical_type": "id",
+          "required": false,
+          "visibility": "restricted",
+          "rule": "consulta sin cuenta permitida"
+        },
+        {
+          "name": "product_id",
+          "logical_type": "id",
+          "required": false,
+          "visibility": "internal",
+          "rule": "interes opcional"
+        },
+        {
+          "name": "variant_id",
+          "logical_type": "id",
+          "required": false,
+          "visibility": "internal",
+          "rule": "debe pertenecer al producto"
+        },
+        {
+          "name": "reply_channel",
+          "logical_type": "string",
+          "required": true,
+          "visibility": "restricted",
+          "rule": "solo canal aprobado"
+        },
+        {
+          "name": "contact_value",
+          "logical_type": "string",
+          "required": true,
+          "visibility": "restricted",
+          "rule": "minimo para responder"
+        },
+        {
+          "name": "status",
+          "logical_type": "enum",
+          "required": true,
+          "visibility": "internal",
+          "rule": "pipeline"
+        },
+        {
+          "name": "purpose",
+          "logical_type": "string",
+          "required": true,
+          "visibility": "restricted",
+          "rule": "atencion; no permiso marketing"
+        },
+        {
+          "name": "assigned_to",
+          "logical_type": "id",
+          "required": false,
+          "visibility": "internal",
+          "rule": "operador"
+        },
+        {
+          "name": "first_response_at",
+          "logical_type": "instant",
+          "required": false,
+          "visibility": "internal",
+          "rule": "para tiempo real de respuesta"
+        },
+        {
+          "name": "source_campaign",
+          "logical_type": "string",
+          "required": false,
+          "visibility": "internal",
+          "rule": "UTM sin PII"
+        },
+        {
+          "name": "created_at",
+          "logical_type": "instant",
+          "required": true,
+          "visibility": "internal",
+          "rule": "ISO 8601"
+        }
+      ]
+    },
+    {
+      "entity": "policy_versions",
+      "purpose": "Textos aprobados",
+      "keys": [
+        "id PK",
+        "type + version UNIQUE"
+      ],
+      "relations": [],
+      "fields": [
+        {
+          "name": "id",
+          "logical_type": "id",
+          "required": true,
+          "visibility": "public_when_approved",
+          "rule": "estable"
+        },
+        {
+          "name": "type",
+          "logical_type": "enum",
+          "required": true,
+          "visibility": "public_when_approved",
+          "rule": "privacy/shipping/returns/warranty/terms"
+        },
+        {
+          "name": "version",
+          "logical_type": "string",
+          "required": true,
+          "visibility": "public_when_approved",
+          "rule": "no sobrescribir historico"
+        },
+        {
+          "name": "body",
+          "logical_type": "text",
+          "required": true,
+          "visibility": "public_when_approved",
+          "rule": "texto aprobado"
+        },
+        {
+          "name": "effective_at",
+          "logical_type": "instant",
+          "required": true,
+          "visibility": "public_when_approved",
+          "rule": "fecha de vigencia"
+        },
+        {
+          "name": "approved_by",
+          "logical_type": "id",
+          "required": true,
+          "visibility": "internal",
+          "rule": "responsable"
+        }
+      ]
+    },
+    {
+      "entity": "consents",
+      "purpose": "Registro por finalidad",
+      "keys": [
+        "id PK"
+      ],
+      "relations": [
+        "user_id -> users.id",
+        "policy_version_id -> policy_versions.id"
+      ],
+      "fields": [
+        {
+          "name": "id",
+          "logical_type": "id",
+          "required": true,
+          "visibility": "restricted",
+          "rule": "estable"
+        },
+        {
+          "name": "user_id",
+          "logical_type": "id",
+          "required": false,
+          "visibility": "restricted",
+          "rule": "si tiene cuenta"
+        },
+        {
+          "name": "subject_reference",
+          "logical_type": "string",
+          "required": true,
+          "visibility": "restricted",
+          "rule": "contacto identificado sin publicarlo"
+        },
+        {
+          "name": "purpose",
+          "logical_type": "enum",
+          "required": true,
+          "visibility": "restricted",
+          "rule": "finalidad especifica"
+        },
+        {
+          "name": "policy_version_id",
+          "logical_type": "id",
+          "required": true,
+          "visibility": "restricted",
+          "rule": "version mostrada"
+        },
+        {
+          "name": "granted_at",
+          "logical_type": "instant",
+          "required": false,
+          "visibility": "restricted",
+          "rule": "si otorgado"
+        },
+        {
+          "name": "revoked_at",
+          "logical_type": "instant",
+          "required": false,
+          "visibility": "restricted",
+          "rule": "si revocado"
+        },
+        {
+          "name": "evidence_reference",
+          "logical_type": "string",
+          "required": true,
+          "visibility": "restricted",
+          "rule": "accion/canal; minimizar informacion"
+        }
+      ]
+    },
+    {
+      "entity": "audit_events",
+      "purpose": "Trazabilidad",
+      "keys": [
+        "id PK"
+      ],
+      "relations": [],
+      "fields": [
+        {
+          "name": "id",
+          "logical_type": "id",
+          "required": true,
+          "visibility": "internal",
+          "rule": "estable"
+        },
+        {
+          "name": "actor_id",
+          "logical_type": "id",
+          "required": true,
+          "visibility": "internal",
+          "rule": "persona o servicio identificado"
+        },
+        {
+          "name": "entity_name",
+          "logical_type": "string",
+          "required": true,
+          "visibility": "internal",
+          "rule": "tabla o tipo"
+        },
+        {
+          "name": "entity_id",
+          "logical_type": "id",
+          "required": true,
+          "visibility": "internal",
+          "rule": "registro"
+        },
+        {
+          "name": "action",
+          "logical_type": "string",
+          "required": true,
+          "visibility": "internal",
+          "rule": "creacion/actualizacion/aprobacion"
+        },
+        {
+          "name": "reason",
+          "logical_type": "string",
+          "required": false,
+          "visibility": "internal",
+          "rule": "motivo"
+        },
+        {
+          "name": "created_at",
+          "logical_type": "instant",
+          "required": true,
+          "visibility": "internal",
+          "rule": "ISO 8601"
+        },
+        {
+          "name": "redacted_change",
+          "logical_type": "object",
+          "required": true,
+          "visibility": "internal",
+          "rule": "sin passwords/tokens/contactos innecesarios"
+        }
+      ]
+    }
+  ]
+}

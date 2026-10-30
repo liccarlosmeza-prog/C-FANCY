@@ -1,0 +1,12 @@
+import {DatabaseSync,backup} from 'node:sqlite';
+import {existsSync,mkdirSync} from 'node:fs';
+import path from 'node:path';
+import {fileURLToPath} from 'node:url';
+const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
+const file=process.argv[2];if(!file||!existsSync(file))throw Error('Indica la ruta de una copia SQLite existente.');
+const folder=path.join(root,'runtime/restore-checks');mkdirSync(folder,{recursive:true});const target=path.join(folder,`restaurada-${Date.now()}.sqlite`),start=Date.now();
+const source=new DatabaseSync(path.resolve(file),{readOnly:true});await backup(source,target);source.close();
+const restored=new DatabaseSync(target,{readOnly:true});const integrity=restored.prepare('PRAGMA integrity_check').get().integrity_check;
+if(integrity!=='ok')throw Error('La integridad de la copia no es correcta.');
+const counts=Object.fromEntries(['products','users','advisories'].map(table=>[table,restored.prepare(`SELECT count(*) AS n FROM ${table}`).get().n]));restored.close();
+console.log(JSON.stringify({integrity,counts,elapsed_ms:Date.now()-start,restored_to:target,live_database_modified:false},null,2));

@@ -1,0 +1,60 @@
+{
+  "version": "04",
+  "status": "propuesta_para_validar",
+  "colors": {
+    "ivory": "#F5F1EA",
+    "plum": "#390D2E",
+    "pink": "#EDC0D3",
+    "lavender": "#A3ACEF",
+    "sky": "#9FC6E7",
+    "mint": "#8CCCC1",
+    "coral": "#E77E71"
+  },
+  "area_distribution": {
+    "ivory": 70,
+    "plum": 20,
+    "pink_lavender_combined": 8,
+    "sky_mint_coral_combined": 2
+  },
+  "fonts": {
+    "display": "Cormorant Garamond",
+    "body": "Manrope",
+    "display_fallback": "Georgia, serif",
+    "body_fallback": "Arial, sans-serif"
+  },
+  "font_sizes_px": {
+    "h1_desktop": 64,
+    "h1_mobile": 38,
+    "h2": 36,
+    "body": 16,
+    "small": 14
+  },
+  "spacing_px": [
+    4,
+    8,
+    12,
+    16,
+    24,
+    32,
+    48,
+    64,
+    96
+  ],
+  "radius_px": {
+    "control": 4,
+    "card": 8
+  },
+  "layout": {
+    "max_width_px": 1280,
+    "desktop_columns": 12,
+    "mobile_columns": 4,
+    "mobile_padding_px": 20,
+    "desktop_padding_px": 48
+  },
+  "notes": [
+    "Marfil es una ampliación propuesta de la paleta anterior, solicitada para reducir los extremos.",
+    "No usar los diez acentos simultáneamente en una sección.",
+    "El dorado y plateado de fotografías describen metales, no nuevos colores de interfaz.",
+    "No modificar el dibujo original del logo ni sustituir su monograma."
+  ]
+}

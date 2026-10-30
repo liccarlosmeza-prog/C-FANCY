@@ -1,0 +1,11 @@
+{
+  "integrity": "ok",
+  "counts": {
+    "products": 10,
+    "users": 4,
+    "advisories": 1
+  },
+  "elapsed_ms": 14,
+  "restored_to": "C:\\Users\\licca\\Documents\\Fancy\\DESPLIEGUE\\runtime\\restore-checks\\restaurada-1793336949435.sqlite",
+  "live_database_modified": false
+}

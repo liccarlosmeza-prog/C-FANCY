@@ -1,0 +1,88 @@
+Actúa como diseñador UI/UX senior y desarrollador full stack. Genera un sitio para C’FANCY con las especificaciones siguientes. Trabaja en español.
+
+OBJETIVO
+Tienda digital propia de joyería fina de lujo contemporáneo para México. Primera versión funcional de registro, login/logout, catálogo por categorías, búsqueda/filtros y detalle de producto. El catálogo se consulta sin iniciar sesión. Separa la demostración de la operación comercial real.
+
+ANTES DE ESCRIBIR CÓDIGO
+Inspecciona el repositorio y conserva el framework, las convenciones y los archivos existentes cuando sean utilizables. Expón un plan breve con pantallas, datos, endpoints y puntos de control; después ejecuta el trabajo. No sobrescribas cambios del usuario. Si el proyecto está vacío, prepara un frontend React con TypeScript y un backend Node con una base relacional local; documenta la elección y cómo ejecutar cada servicio. Revisa documentación oficial de las dependencias para evitar APIs inexistentes. No publiques ni contrates servicios.
+
+MARCA
+Nombre: C’FANCY. Eslogan original: ELEVATE YOUR ELEGANCE.
+Descripción: C’FANCY es una marca de joyería fina de lujo contemporáneo para mujeres que valoran un estilo propio, el detalle y una atención personal. Su propuesta reúne piezas en oro, plata, diamantes naturales y de laboratorio, gemas y diseños personalizados. La experiencia combina compra digital, asesoría durante la elección y servicio posventa. Su personalidad es femenina, elegante, sofisticada y atemporal. Público principal declarado: mujeres de 30–50 años con alto poder adquisitivo; ampliado: 25–65 años interesadas en joyería fina. Mercado México.
+Frase editorial: Elegancia que permanece. Mensaje de servicio: Asesoría que acompaña tu elección.
+Los chakras e intenciones son una colección secundaria opcional, desactivada por defecto hasta confirmación; no deben dominar la marca ni incluir promesas terapéuticas.
+
+IDENTIDAD VISUAL INTERMEDIA
+Evita tanto la página negra predominante como la saturación pastel. Utiliza marfil #F 5 F 1 EA como nueva base neutra propuesta: 70% de superficies gráficas. Ciruela #390 D 2 E 20%, principalmente texto y botones. Rosa #EDC 0 D 3 y lavanda #A 3 ACEF combinados 8%. Azul #9 FC 6 E 7, menta #8 CCCC 1 y coral #E 77 E 71 combinados 2%, solo en detalles. Los porcentajes excluyen las fotos y no requieren mostrar todos los tonos. No inventes otros colores de marca. Los colores reales de metales, piedras y piel se conservan en las fotografías.
+Títulos Cormorant Garamond; texto y navegación Manrope; alternativas Georgia y Arial. Cuerpo 16–18 px, auxiliar 14 px; H 1 escritorio 64 px y móvil 38 px. Máximo 1280 px, márgenes 48 px escritorio y 20 px móvil. Botones radio 4 px; aire editorial, jerarquía clara y fotografía macro sobre piedra marfil.
+Conserva el logo original adjunto: monograma entrelazado con arco inferior y diamante, nombre y eslogan. No lo sustituyas por letras CF genéricas. Solicita el archivo maestro para producción; si no existe úsalo como imagen de referencia, con texto alternativo y sin inventar un SVG supuestamente original. La guía PNG y los mockups son referencia de composición; el catálogo JSON y los tokens escritos mandan sobre nombres o precios de los mockups.
+
+ESTRUCTURA Y PANTALLAS
+1. Inicio: logo, menú Joyas/Materiales/Colecciones/Asesoría, búsqueda, cuenta, selección. Hero con Elegancia que permanece, texto Joyería fina de lujo contemporáneo y botones Descubrir colección/Recibir asesoría. Destacados, materiales, servicio personal y footer.
+2. Catálogo: Anillos, Aretes, Collares, Pulseras. Oro 18 k, Plata 925, diamantes naturales, diamantes de laboratorio y gemas son filtros o accesos de colección. Novedades, Alta joyería y Personalizadas son colecciones. No dupliques productos por categoría.
+3. Búsqueda: nombre sin diferencia de acentos/mayúsculas, categoría y precio mínimo/máximo con AND, orden por nombre/precio, conteo, paginación y sin resultados. Conserva filtros en URL y al regresar del detalle. Cambiar filtro reinicia página. Min>max es un error visible. Cancela respuestas antiguas de búsqueda.
+4. Detalle: galería con zoom y fotos frontal/lateral/detalle/escala/cierre; video opcional; nombre, precio MXN, metal/k o ley, peso, medidas, tipo/origen de piedra, variantes/tallas, certificados cuando correspondan, disponibilidad, entrega, cuidados, garantía, envíos/cambios/devoluciones, botón de selección y asesoría. No inventes certificados. Un agotado no puede añadirse; personalizado requiere asesoría.
+5. Registro: nombre, correo, contraseña y confirmación. Valida cliente/servidor, errores accesibles y carga. Marketing opcional separado. Acceso, salida, sesión expirada y errores genéricos. Hash Argon2id en servidor, nunca contraseña cifrada de forma reversible ni en localStorage. Sesión opaca con cookie segura HttpOnly y SameSite, CSRF, rotación al entrar y revocación al salir. Diferencia configuración localhost de HTTPS producción. No uses autenticación falsa para presentar como completa la historia de usuario. No registres secretos en logs.
+
+ALCANCE COMERCIAL
+Puedes permitir guardar una selección de piezas como funcionalidad de demo. No implementes pagos reales ni simules confirmaciones de pedidos. Un botón Comprar muestra Compra aún no habilitada o conduce a una selección claramente identificada como demo hasta que exista una fase de pedidos. Asesoría debe ser configurable; si no hay teléfono/correo, muestra Canal pendiente de configurar sin inventarlo. No envíes datos a terceros. No publiques políticas, plazos, origen o certificados no verificados.
+
+API Y DATOS
+Si adjunto el ZIP, usa openapi.yaml, productos_demo.json, categorias.json y colecciones.json. Implementa GET /api/v1/auth/csrf, POST /auth/register, POST /auth/login, POST /auth/logout, GET /auth/me, GET /categories, GET /collections, GET /products y GET /products/:slug bajo el mismo prefijo /api/v1. Usa queries parametrizadas y validación. Catálogo público; solo published en producción. En DEMO permite demo_only y todos los productos deben indicar is_demo=true. No expongas hash de contraseña ni stock preciso al público. Paginación predeterminada 12, configurable 1–50, orden estable con id. Registro 202 genérico; login 401 genérico; logout 204; 400 validación,403 CSRF,404 oculto/inexistente,429 límite. Rutas de recuperación/verificación de correo y compra se documentan como fase posterior antes del lanzamiento.
+
+CATÁLOGO DE DEMOSTRACIÓN
+Todos los productos siguientes son ficticios. Sus precios, metales, orígenes, pesos, medidas, stock y plazos son datos de prueba, nunca inventario real. Mostrarlo en un aviso discreto de demo. No generar números de certificado. Las condiciones de envío, garantía y devoluciones están pendientes. Utiliza fotos suministradas; si faltan, muestra un placeholder honesto o ilustración conceptual etiquetada, sin usar el mismo anillo para todos ni afirmar que una imagen demuestra material.
+
+1. Anillo Aurora | SKU CF-DEMO-001 | anillos | $38,900 MXN ficticios.
+Descripción: Un solitario de líneas limpias y proporciones delicadas. Una pieza pensada para acompañar un logro o una promesa personal.
+Especificación ficticia: Oro amarillo 18 k; Diamante; origen natural; 0.3 ct total; 2.8 g. Aro 2 mm; centro 4.3 mm; talla de referencia US 6.
+Opciones: US 6; US 7. Estado demo: in_stock. Certificados: pending_verification.
+
+2. Aretes Alba | SKU CF-DEMO-002 | aretes | $24,900 MXN ficticios.
+Descripción: Dos puntos de luz de diseño sobrio. El montaje discreto permite llevarlos solos o combinarlos con otras piezas.
+Especificación ficticia: Oro blanco 18 k; Diamantes; origen laboratory; 0.5 ct total; 1.9 g. Diámetro frontal 4 mm; poste 10 mm; par.
+Opciones: Par con cierre de presión. Estado demo: in_stock. Certificados: pending_verification.
+
+3. Collar Vínculo | SKU CF-DEMO-003 | collares | $3,900 MXN ficticios.
+Descripción: Un círculo de plata de contorno continuo. Su diseño propone un símbolo personal de unión y permanencia sin imponer un significado.
+Especificación ficticia: Plata ley 925; Sin piedra; origen none; sin gema; 4.2 g. Cadena 40 cm + extensión 5 cm; dije circular 12 mm.
+Opciones: 40 + 5 cm. Estado demo: out_of_stock. Certificados: not_applicable.
+
+4. Pulsera Serena | SKU CF-DEMO-004 | pulseras | $18,900 MXN ficticios.
+Descripción: Una cadena fina con un acento azul. El diseño combina presencia de color y una silueta contenida para uso individual o en conjunto.
+Especificación ficticia: Oro amarillo 18 k; Zafiro azul; origen natural; 0.35 ct total; 3.1 g. Largo ajustable 16–18 cm; gema oval 5 × 4 mm.
+Opciones: 16–18 cm. Estado demo: in_stock. Certificados: pending_verification.
+
+5. Anillo Esencia Rosa | SKU CF-DEMO-005 | anillos | $52,900 MXN ficticios.
+Descripción: Una gema rosa de corte oval enmarcada por acentos de luz. Su composición conserva el carácter femenino de la marca con una lectura contemporánea.
+Especificación ficticia: Oro rosa 18 k; Zafiro rosa y diamantes de acento; origen mixed; 0.95 ct total; 3.6 g. Centro 6 × 4 mm; aro 2.1 mm; talla US 6.
+Opciones: US 6. Estado demo: in_stock. Certificados: pending_verification.
+
+6. Collar Origen Personalizado | SKU CF-DEMO-006 | collares | $22,900 MXN ficticios.
+Descripción: Una medalla de proporciones discretas con iniciales o una palabra elegida. El proceso requiere revisión del diseño y confirmación de las especificaciones antes de producir.
+Especificación ficticia: Oro amarillo 18 k; Esmeralda; origen natural; 0.25 ct total; 3.4 g. Cadena 45 cm; medalla 14 mm; grabado de hasta 8 caracteres.
+Opciones: 45 cm y grabado. Estado demo: made_to_order. Certificados: pending_verification.
+
+7. Aretes Celeste | SKU CF-DEMO-007 | aretes | $21,900 MXN ficticios.
+Descripción: Dos zafiros azules en una montura de líneas contenidas. Su silueta aporta color sin perder discreción y permite combinarlos con piezas lisas.
+Especificación ficticia: Oro amarillo 18 k; Zafiros azules; origen natural; 0.7 ct total; 2.4 g. Par; alto 12 mm; gemas 5 × 4 mm.
+Opciones: Par con cierre de presión. Estado demo: in_stock. Certificados: pending_verification.
+
+8. Pulsera Lazo | SKU CF-DEMO-008 | pulseras | $4,900 MXN ficticios.
+Descripción: Eslabones pulidos de proporción equilibrada. Una pulsera de plata que puede acompañar el día a día o completar una combinación de piezas.
+Especificación ficticia: Plata ley 925; Sin piedra; origen none; sin gema; 7.8 g. Largo 17 y 19 cm; eslabón 4 mm.
+Opciones: 17 cm; 19 cm. Estado demo: in_stock. Certificados: not_applicable.
+
+9. Collar Luz | SKU CF-DEMO-009 | collares | $14,900 MXN ficticios.
+Descripción: Un diamante de laboratorio suspendido en una cadena fina. Un diseño sobrio que concentra la atención en un solo punto de luz.
+Especificación ficticia: Oro amarillo 18 k; Diamante; origen laboratory; 0.2 ct total; 2.2 g. Cadena 40 + 5 cm; dije 4 mm.
+Opciones: 40 + 5 cm. Estado demo: in_stock. Certificados: pending_verification.
+
+10. Anillo Horizonte | SKU CF-DEMO-010 | anillos | $45,900 MXN ficticios.
+Descripción: Un solitario de presencia definida y diseño limpio. El diamante de laboratorio ocupa el centro de una montura pensada para conservar una lectura atemporal.
+Especificación ficticia: Oro blanco 18 k; Diamante; origen laboratory; 1.0 ct total; 3.9 g. Aro 2 mm; piedra central 6.4 mm; tallas US 6 y 7.
+Opciones: US 6; US 7. Estado demo: in_stock. Certificados: pending_verification.
+
+CALIDAD Y ENTREGA
+Responsive a 360/768/1280 px con 1/2/4 columnas de catálogo. Estados cargando, vacío, error/reintento,404, sesión expirada, agotado y bajo pedido. Teclado, foco visible, etiquetas, texto alternativo y contraste verificado; no depender solo de color. No ocultar falta de imágenes. Preparar imágenes optimizadas sin alterar el color de producto.
+Entrega estructura de archivos, instrucciones de ejecución, variables de entorno sin secretos, modo demo, migraciones o seed y pruebas relevantes para las cuatro historias. Ejecuta build y pruebas realmente disponibles; informa cuáles pasaron y cuáles no. No escribas solo un plan ni fragmentos: termina una implementación revisable en el repositorio, sin desplegarla.
