@@ -1,16 +1,24 @@
-# Verificación de la prueba estática
+# Verificación de paridad · 30/10/2026
 
-30/10/2026. No se reutiliza como evidencia la suite de API de la aplicación original: esta entrega no contiene API ni servidor.
+Esta revisión corresponde a la interfaz completa compilada desde una copia de DESPLIEGUE. La evidencia anterior permanece en el historial Git.
 
-- Sintaxis de `app.js` y `catalogo.js` comprobada con `node --check`.
-- Diez productos y diez trípticos locales: 30 vistas. Ningún medio o archivo enlazado desde el HTML falta.
-- Ninguna llamada `fetch`, XMLHttpRequest o WebSocket en la aplicación. Sin dependencias de CDN ni importaciones remotas de fuentes.
-- En navegador HTTP bajo `/despliegueGithub/`: catálogo de diez artículos, búsqueda de Aurora, cambio de vista lateral, selección y recarga de ficha por hash.
-- Acceso visual de cliente y administrador; nombre en cabecera; asesoría con pieza vinculada; respuesta administrativa; propuesta ilustrativa; lectura e interés registrado por cliente. Recarga conserva selección, conversación y propuesta.
-- Consola sin errores en el recorrido comprobado.
-- Portada sin desbordamiento horizontal: viewport 360/ancho útil 345/documento 345; 768/753/753; 1280/1265/1265. Conversación móvil: 360/345/345, con navegación interior desplazable.
-- Apertura `file://` preparada mediante scripts clásicos y datos incorporados, sin carga JSON de red. No comprobada en el navegador integrado porque su política solo permite HTTP/HTTPS. La prueba funcional se ejecutó con un servidor de archivos estáticos, sin API.
+## Pruebas
 
-La simulación es pública, sin autenticación ni aislamiento entre perfiles. Todo se guarda localmente con prefijo `cfancy-pages-v1:`. No hay envíos, cobros, sesiones de servidor ni edición comercial del catálogo. Los datos de prueba del navegador no se incluyen en Git.
+**11 procesos aprobados**, mediante node herramientas/pruebas.mjs: catálogo/filtros/páginas, perfil/favoritos, consulta vinculada e idempotencia, notas internas/respuestas/prioridad/asignación, propuestas y citas múltiples con vigencia y respuesta, alta/edición/archivo/precios/SKU, políticas/taxonomías, actividad/clientes/auditoría/exportación, registro/consentimiento/verificación/recuperación de un uso, rechazo de respaldos ajenos y restauración JSON de consultas/fichas/configuración.
 
-`DESPLIEGUE` se conserva como base original. El repositorio remoto publica esta variante desde `gh-pages`; la rama `main` y su flujo existente de Azure se conservan. La activación de Pages y su estado final se comunican al entregar; preparar una rama no equivale por sí solo a un despliegue exitoso.
+Compilación en app.js y app.css con esbuild. Se comprueba que el bundle no contiene llamadas fetch, XMLHttpRequest o WebSocket. Datos incorporados e imágenes relativas; no hay API ni dependencias de CDN.
+
+Revisión de navegador local: ingreso admin; Resumen, Atención, Catálogo, Clientes, Actividad, Configuración, Buzón e Historial; editor completo de Aurora y guardado de plazo informativo. Las nuevas secciones cargaron sin errores.
+
+La apertura directa file:// no se certifica: el navegador integrado solo permite HTTP/HTTPS. La prueba funcional usa un servidor de archivos, sin API.
+
+## Límites
+
+Los controles locales permiten recorrer pantallas; no se certifican como seguridad. Datos inspeccionables y modificables por quien usa el dispositivo. No hay servicio externo, HttpOnly, correo real, WhatsApp, cobro, pedido ni inventario compartido. La suite de API original no se presenta como evidencia de esta variante.
+
+La publicación se comprueba después de subir el commit. Compilar no equivale a desplegar. DESPLIEGUE se compara por hash y estado Git para verificar que esta tarea no la modifica.
+
+
+Revisión adicional ejecutada: imagen PNG seleccionada desde el editor, optimizada a WebP local, guardada y visible después de recargar; plazo informativo también persistente. Consola sin errores en la revisión final. Enlaces de cabecera verificados como rutas #/ y marcador de versión Carga-3-paridad presente.
+
+Anchos medidos: editor móvil 360 px, documento/ancho útil 345/345; panel a 768 px, 753/753; panel a 1280 px, 1265/1265. No hubo desbordamiento del documento. Son viewports emulados, no dispositivos físicos ni una auditoría integral de accesibilidad.

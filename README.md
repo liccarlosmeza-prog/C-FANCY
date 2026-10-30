@@ -1,41 +1,66 @@
-# C’FANCY · Prueba estática para GitHub Pages
+# C’FANCY · Interfaces completas para GitHub Pages
 
-HTML, CSS y JavaScript sin React, dependencias, compilación, servidor de aplicación ni API. Conserva diez productos ficticios y sus 30 vistas IA. No modifica la base original `DESPLIEGUE`.
+Esta actualización reemplaza la prueba simplificada por una copia de los componentes visuales de DESPLIEGUE, conectados a datos del navegador. El resultado publicado es HTML, CSS y JavaScript estático, sin API, servidor ni instalaciones para visitarlo. La base original no se modifica.
 
-## Abrir localmente
+Sitio: **https://liccarlosmeza-prog.github.io/C-FANCY/**. Publicación: rama `gh-pages`. `main` conserva la aplicación con servidor y su flujo de Azure.
 
-Abre `index.html` con doble clic. También puedes servir esta carpeta con cualquier servidor de archivos estáticos. `catalogo.js` incorpora los datos para evitar peticiones de red y permitir el uso mediante `file://`. Las fuentes tienen alternativas locales; no se requieren CDNs.
+## Accesos públicos de prueba
 
-## Probar los perfiles
-
-| Perfil visual | Correo público de prueba | Clave pública de prueba |
+| Perfil | Correo | Contraseña |
 | --- | --- | --- |
-| Cliente | `cliente@cfancy.demo` | `Cfancy.Cliente.2026!` |
-| Administración | `admin@cfancy.demo` | `Cfancy.Admin.2026!` |
+| Cliente | cliente@cfancy.demo | Cfancy.Cliente.2026! |
+| Administrador | admin@cfancy.demo | Cfancy.Admin.2026! |
 
-Son controles de demostración visibles en el código, no autenticación ni protección de información. No uses credenciales reales ni datos personales. La sesión, selección, consultas, respuestas, propuestas y citas se guardan solo en el almacenamiento de este navegador. Cada navegador/dispositivo tiene datos distintos. GitHub Pages no recibe las solicitudes de asesoría para la marca.
+Usa datos y claves ficticios. El acceso, los perfiles y las notas internas son una simulación visual sin seguridad real. La interfaz muestra esta advertencia permanentemente.
 
-Recorrido: catálogo → detalle y tres vistas → selección → ingreso cliente → asesoría → cerrar sesión demo → ingreso administrador → Atención → respuesta/propuesta/cita → volver al cliente → Mis consultas. La compra muestra un aviso sin generar transacción. El catálogo administrativo es de lectura; la edición real permanece en la base original.
+## Recorridos incluidos
 
-La sección **Cómo probar** explica los recorridos y permite restablecer únicamente los datos de esta demo estática.
+- Tienda: inicio, categorías, búsqueda, rango de precios, orden A–Z/Z–A/precio, paginación y tamaño de página, materiales y colecciones.
+- Diez productos: tres vistas, ampliación, variantes, disponibilidad, ficha técnica, cuidados y políticas.
+- Cliente: Mi espacio, Mis consultas, Mi selección y Mi perfil; preferencias, verificación y exportación JSON propia.
+- Administrador: Resumen, Atención, Catálogo editable, Clientes, Actividad, Configuración, Buzón local e Historial.
+- Atención: pieza y variante vinculadas, correo de prueba, ocasión y presupuesto, respuestas, notas internas visuales, prioridad, responsable y seis etapas.
+- Varias propuestas con importe/vigencia/respuesta y varias citas para confirmar, declinar o cancelar.
+- Catálogo: alta, edición y archivo; precio/cotización, SKU, variantes, existencias, materiales, gemas, documentación declarativa y colecciones. Carga local de PNG/JPG/WebP hasta 8 MB, optimizada y guardada en el navegador.
+- Servicio y políticas editables, categorías/colecciones, actividad calculada y auditoría local.
+- Registro, recuperación y verificación con enlaces de un uso en el buzón simulado; no se envía correo.
+- Descargas JSON de cuenta/gestión y respaldo restaurable.
 
-## GitHub Pages
+Comparación detallada: [COMPARACION.md](COMPARACION.md). Pruebas: [VERIFICACION.md](VERIFICACION.md).
 
-Repositorio: `liccarlosmeza-prog/C-FANCY`. La rama `gh-pages` contiene únicamente los archivos estáticos de esta carpeta, con `index.html` en su raíz. `main` conserva la base original y la configuración de Azure que ya tenía; no se modifica para esta prueba.
+Cliente → ficha y variante → solicitar asesoría → salir → administrador → Atención → responder y crear propuesta/cita → cliente → Mis consultas. Las notas internas solo se ocultan en la interfaz cliente; no son confidenciales.
 
-En GitHub: **Settings → Pages → Build and deployment → Deploy from a branch → gh-pages → /(root) → Save**. Dirección esperada tras finalizar la publicación: `https://liccarlosmeza-prog.github.io/C-FANCY/`.
+Recuperación/verificación: solicitar enlace → ingresar como administrador → Buzón local → abrir enlace en este mismo navegador → completar el recorrido → volver a entrar como cliente.
 
-Los enlaces y medios son relativos; las rutas de pantalla usan `#/`, por ejemplo `#/joya/anillo-aurora`. Abrir una ficha y recargar no requiere reescrituras ni devuelve una ruta inexistente del servidor. `.nojekyll` evita procesar la carpeta con Jekyll.
+## Persistencia y límites
 
-Para actualizar la prueba, ejecuta dentro de esta carpeta:
+Datos en IndexedDB (`cfancy-pages-paridad-v3`), con alternativa local si IndexedDB no está disponible. La sesión visual queda en la pestaña. No hay sincronización entre equipos ni aislamiento seguro entre perfiles. Todo es inspeccionable: no uses datos personales, contraseñas reales ni documentos confidenciales.
+
+El almacenamiento de la primera prueba (`cfancy-pages-v1:`) permanece, pero no se importa automáticamente al nuevo modelo. No se copia la base SQLite original. Cada instalación nueva empieza con diez artículos y dos accesos, sin consultas inventadas.
+
+**Guía y accesos de prueba**, arriba del sitio, ofrece restablecimiento y respaldo/restauración JSON. Para restaurar necesitas el perfil admin demo; después vuelve a iniciar sesión. No es un respaldo SQLite ni una restauración del servidor.
+
+La publicación comercial se bloquea: conserva artículos demo, en revisión, borrador o archivo. No hay cobros, pedidos, reservas de inventario, envíos externos ni seguridad de servidor. Estas capacidades requieren la base completa y decisiones de la marca.
+
+## Abrir y actualizar
+
+Abre `index.html` o sirve esta carpeta con cualquier servidor de archivos. No se requiere compilar para visitar. La apertura directa file:// no se presenta como prueba ejecutada: el navegador integrado solo permite HTTP/HTTPS.
+
+Las fuentes editables están en `fuente/`. Para recompilar, con las dependencias originales instaladas al lado:
 
 ```powershell
-git status
+node herramientas/construir.mjs
+node herramientas/pruebas.mjs
+```
+
+El compilador solo lee dependencias de ../DESPLIEGUE/node_modules y escribe aquí. adaptar.py documenta la transformación inicial de la copia; no lo ejecutes de nuevo sobre fuentes ya adaptadas sin volver a copiar primero la interfaz original. demo-store.ts y DemoTools.tsx son exclusivos de esta variante.
+
+Después de verificar:
+
+```powershell
 git add .
 git commit -m "Describe el ajuste de la prueba"
 git push origin gh-pages
 ```
 
-No se necesita cambiar `DESPLIEGUE`, `main` ni la base de datos original.
-
-No incluye datos de `runtime/`, secretos, skills ni documentación de negocio dentro de la rama publicada. El resto del proyecto sigue disponible en `main`.
+Pages publica la raíz de gh-pages. Los enlaces usan #/ y no requieren reescrituras. No hay service worker; recarga con Ctrl+F5 si conservas una versión anterior tras la publicación.

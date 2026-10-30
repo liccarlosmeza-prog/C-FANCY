@@ -15,4 +15,3 @@ nav a,nav button{font-weight:700;color:#390d2e}nav{letter-spacing:.6px}.category
 @media(max-width:1100px){nav{gap:20px}.tools .account-name{max-width:100px}.category-tabs button{padding:12px 16px}}
 @media(max-width:899px){.tools .account-name{max-width:75px}.account-button{gap:3px}.gallery{position:static}.detail{grid-template-columns:1fr 1fr}.hero-art{min-height:480px}}
 @media(max-width:620px){.hero-art{min-height:0;height:390px}.detail{grid-template-columns:1fr}.tools .account-name{font-size:10px;max-width:85px}.category-tabs{gap:5px;padding:7px}.category-tabs button{padding:12px 15px}.technical-table{grid-template-columns:1fr 1.7fr!important}header{gap:8px}.brand{width:100px}.brand img{width:100px}.tools{gap:2px}.hero-copy{padding-top:38px}}
-
