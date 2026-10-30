@@ -1,12 +1,11 @@
+# Esta rama publica HTML/CSS/JS mediante GitHub Pages; no requiere .NET.
+# Se conserva el flujo Azure heredado solo manual para evitar despliegues ajenos a la prueba.
 # Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
 # More GitHub Actions for Azure: https://github.com/Azure/actions
 
-name: Build and deploy ASP.Net Core app to Azure Web App - C-FANCY
+name: Azure manual - configuracion heredada ASP.NET C-FANCY
 
 on:
-  push:
-    branches:
-      - 'gh-pages'
   workflow_dispatch:
 
 jobs:

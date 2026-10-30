@@ -22,3 +22,5 @@ La publicación se comprueba después de subir el commit. Compilar no equivale a
 Revisión adicional ejecutada: imagen PNG seleccionada desde el editor, optimizada a WebP local, guardada y visible después de recargar; plazo informativo también persistente. Consola sin errores en la revisión final. Enlaces de cabecera verificados como rutas #/ y marcador de versión Carga-3-paridad presente.
 
 Anchos medidos: editor móvil 360 px, documento/ancho útil 345/345; panel a 768 px, 753/753; panel a 1280 px, 1265/1265. No hubo desbordamiento del documento. Son viewports emulados, no dispositivos físicos ni una auditoría integral de accesibilidad.
+
+Se integró el commit remoto db14814 sin sobrescribirlo. Su flujo Azure de ASP.NET se conserva solo con workflow_dispatch: esta rama no tiene proyecto .NET y los cambios de la prueba no deben disparar ese despliegue. main y su configuración no se modificaron.

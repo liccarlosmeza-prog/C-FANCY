@@ -64,3 +64,5 @@ git push origin gh-pages
 ```
 
 Pages publica la raíz de gh-pages. Los enlaces usan #/ y no requieren reescrituras. No hay service worker; recarga con Ctrl+F5 si conservas una versión anterior tras la publicación.
+
+La configuración Azure heredada añadida a gh-pages se conserva con ejecución manual; esta rama estática no contiene un proyecto ASP.NET. GitHub Pages usa su proceso propio de publicación desde la rama.
