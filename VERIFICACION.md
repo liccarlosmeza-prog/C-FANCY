@@ -1,5 +1,7 @@
 # Verificación de paridad · 30/10/2026
 
+**Carga-9 · Lo que llevas contigo.** 24 pruebas aprobadas. Las portadas con el texto anterior de fábrica pasan al nuevo y se conservan los textos personalizados. El encuadre de Ónix editorial usa un WebP de 1122 × 1402 de 368 056 bytes con el canal alfa del PNG intacto. La revisión del diseño en navegador queda pendiente.
+
 **Carga-8 · Ónix editorial.** 23 pruebas aprobadas. Se verificaron la migración de portadas anteriores, la persistencia del reemplazo y la validación de transparencia. El WebP de 1076 × 1462 pesa 299 652 bytes y conserva el canal alfa exacto del PNG, con las cuatro esquinas transparentes. El navegador está deshabilitado en Work, por lo que no hubo revisión visual de la página en escritorio y móvil.
 
 **Carga-7 · Filtros y tipografía:** 21 pruebas de procesos aprobadas. Se verificó que cambiar o quitar el tono conserva los demás filtros y reinicia la paginación, que la migración conserva el texto personalizado de portada y que las paletas anteriores siguen siendo compatibles. La compilación incluye siete archivos de fuentes locales con sus licencias. El navegador está deshabilitado en Work, por lo que esta revisión no incluye una inspección visual en pantalla.

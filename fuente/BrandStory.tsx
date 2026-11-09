@@ -9,10 +9,10 @@ export function BrandHero({go,advice,text}:{go:(s:string)=>void;advice:()=>void;
   return <section className="gaze-hero campaign-tone textured" aria-labelledby="gaze-title"><div className="gaze-copy"><p className="eyebrow">C’FANCY <span aria-hidden="true">/</span> {text.eyebrow}</p><h1 className="cover-lines" id="gaze-title">{text.title}</h1><p className="gaze-subtitle">{text.subtitle}</p><p className="gaze-intro cover-lines">{text.body}</p><div className="gaze-actions"><button className="primary" onClick={()=>go('/colores')}>{text.primary} <span>↗</span></button><button className="text-button" onClick={advice}>{text.secondary} →</button></div>{text.chapter&&<p className="gaze-edition"><span aria-hidden="true">✧</span>{text.chapter}</p>}</div><figure className="gaze-portrait"><img src="./assets/campana/mirada-editorial.jpg" alt={text.alt} fetchPriority="high"/>{text.caption&&<figcaption>{text.caption}</figcaption>}</figure></section>;
 }
 
-export function InstinctStory({text,image=defaultInstinctImage}:{text:Cover['text']['instinct'];image?:string}){
+export function InstinctStory({text,image=defaultInstinctImage,go}:{text:Cover['text']['instinct'];image?:string;go:(s:string)=>void}){
   return <section className="instinct-story campaign-tone textured" aria-labelledby="instinto-title">
     <figure><img src={image} alt={text.alt} loading="lazy"/>{text.caption&&<figcaption>{text.caption}</figcaption>}</figure>
-    <div><p className="eyebrow">{text.eyebrow}</p><h2 id="instinto-title" className="cover-lines">{text.title}</h2><p className="cover-lines">{text.body}</p><p className="cover-lines">{text.detail}</p></div>
+    <div><p className="eyebrow">{text.eyebrow}</p><h2 id="instinto-title" className="cover-lines">{text.title}</h2><p className="cover-lines">{text.body}</p><p className="cover-lines">{text.detail}</p><a href="#/colores" className="text-button instinct-action" onClick={e=>{if(e.metaKey||e.ctrlKey||e.shiftKey||e.altKey)return;e.preventDefault();go('/colores')}}>{text.action} <span aria-hidden="true">→</span></a></div>
   </section>;
 }
 

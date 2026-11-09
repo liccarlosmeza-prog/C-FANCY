@@ -79,4 +79,22 @@ await check('La carga de portada rechaza fondos opacos e imágenes vacías y cie
     globalThis.createImageBitmap=previousBitmap;
   }
 });
+await check('La sección adopta el texto nuevo y el enlace sin sobrescribir portadas personalizadas',async()=>{
+  const draft=structuredClone(cover.defaultCover);
+  const instinct=draft.text.instinct;
+  instinct.title='Instinto y color.';
+  instinct.body='La pantera sostiene la mirada. El retrato la devuelve. Entre ambas hay un instante de reconocimiento: algo te atrae antes de que sepas nombrarlo.';
+  instinct.detail='En C’FANCY, ese instante inspira joyas para acompañar tus rituales personales de introspección. El color da forma a esa intención.';
+  delete instinct.action;
+  const migrated=cover.readCover(draft).text.instinct;
+  assert.equal(migrated.title,'Lo que llevas contigo');
+  assert.match(migrated.body,/una promesa, una decisión o un comienzo/);
+  assert.equal(migrated.action,'Encuentra una pieza que te hable');
+  instinct.body='Texto personalizado';
+  const custom=cover.readCover(draft).text.instinct;
+  assert.equal(custom.title,'Instinto y color.');
+  assert.equal(custom.body,'Texto personalizado');
+  instinct.action='Mi enlace personalizado';
+  assert.equal(cover.readCover(draft).text.instinct.action,instinct.action);
+});
 await resetDemo();console.log(`${passed} pruebas de procesos locales aprobadas.`);
