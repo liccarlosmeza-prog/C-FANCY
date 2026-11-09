@@ -4,6 +4,8 @@ Esta actualización reemplaza la prueba simplificada por una copia de los compon
 
 Sitio: **https://liccarlosmeza-prog.github.io/C-FANCY/**. Publicación: rama `gh-pages`. `main` conserva la aplicación con servidor y su flujo de Azure.
 
+**Carga-4 · La mirada del color.** La portada incorpora las dos imágenes de campaña y el recorrido por siete tonos. En **Administración → Apariencia** hay cinco temas, con Ónix y oro como base, duplicación, mezcla por componente y texturas. Consulta la [guía de apariencia](APARIENCIA.md).
+
 ## Accesos públicos de prueba
 
 | Perfil | Correo | Contraseña |

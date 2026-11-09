@@ -1,0 +1,20 @@
+# C’FANCY · La mirada del color
+
+La portada conecta el retrato con anillos y la pantera a través de sus miradas. La frase «Las joyas te eligen a ti, a través del color» da paso a siete tonos e intenciones inspiradas en los chakras. Es un lenguaje editorial y espiritual: las piezas no se presentan como tratamientos. Las dos fotografías de campaña están en `assets/campana/` y no representan productos de inventario.
+
+## Probar y personalizar una paleta
+
+1. Inicia sesión como administrador demo. Entra a **Apariencia** en el menú de gestión.
+2. Las cinco bases son **Ónix y oro** (inicial), **Marfil y ciruela**, **Selva esmeralda**, **Noche índigo** y **Alba rosa**. Puedes previsualizar o aplicar una base directamente.
+3. Usa **Duplicar** y asigna un nombre. Selecciona un componente. Cada uno tiene fondo, texto, acento y borde propios. En Botones se pueden editar también el fondo y texto al pasar el cursor.
+4. Cambia cada tono con el selector de color o **Tomar de otra paleta**. El menú ofrece el color equivalente y los tonos generales de cada base. La copia no altera ninguna de las cinco bases.
+5. Ajusta la textura de las secciones editoriales: lisa, grano fino o satinada. Compara la vista previa de escritorio y móvil. El editor marca combinaciones de texto o acento y fondo que no llegan a 4.5:1; esta comprobación no sustituye una auditoría de accesibilidad.
+6. Selecciona **Guardar y aplicar mi paleta**. Se conserva entre recargas en este navegador. El menú **Mis paletas** permite volver a una copia; **Restaurar Ónix y oro** recupera la base sin borrar las copias.
+
+El tema se exporta e importa como un JSON independiente del respaldo de cuentas y consultas. GitHub Pages no guarda las ediciones del administrador en un servidor. Para publicar una paleta para quienes aún no han guardado una preferencia, exporta el JSON, colócalo en `fuente/datos/tema-publico.json`, ejecuta `node herramientas/construir.mjs` y publica `gh-pages`. Con `null` se mantiene Ónix y oro. El archivo admite solo colores hexadecimales y acabados definidos, sin CSS libre ni recursos externos.
+
+## Recorrido por tonos
+
+**Deja que una joya te encuentre** abre la exploración por color. Cada tono filtra el catálogo por sus etiquetas editoriales; los tonos sin piezas ofrecen asesoría en vez de sugerir inventario inexistente. El formulario conserva el tono que llevó a la consulta. En **Administración → Catálogo**, cada ficha permite editar sus **Tonos de inspiración**. La etiqueta expresa afinidad de color e intención, no el tipo de gema ni una propiedad terapéutica.
+
+La actualización se limita a `despliegueGithub`. La base `DESPLIEGUE`, su servidor y su rama no se modifican.

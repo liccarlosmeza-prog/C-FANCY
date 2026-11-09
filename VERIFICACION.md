@@ -1,5 +1,7 @@
 # Verificación de paridad · 30/10/2026
 
+**Carga-4 · 08/11/2026:** la suite suma 15 pruebas. Las nuevas cubren el filtro por tonos y la edición de etiquetas, las cinco paletas completas y su contraste, la copia y combinación de colores con persistencia, y el rechazo de archivos o combinaciones inválidas. La vista previa interactiva no se pudo ejecutar porque el navegador está deshabilitado en la configuración de Work. Se validan compilación y entrega de archivos por HTTP.
+
 Esta revisión corresponde a la interfaz completa compilada desde una copia de DESPLIEGUE. La evidencia anterior permanece en el historial Git.
 
 ## Pruebas
