@@ -1,15 +1,21 @@
 import {useEffect,useRef,useState} from 'react';
 import type {Cover} from './cover';
-import type {Group,Palette} from './theme';
+import type {Palette} from './theme';
 import {channel,previewPages} from './preview';
+import type {PreviewTarget} from './preview';
 
-export function SitePreview({palette,cover,group}:{palette:Palette;cover:Cover;group?:Group}){
+export function SitePreview({palette,cover,group}:{palette:Palette;cover:Cover;group?:PreviewTarget}){
   const [device,setDevice]=useState<'desktop'|'mobile'>('desktop'),[route,setRoute]=useState('/'),[expanded,setExpanded]=useState(false),[available,setAvailable]=useState(800),[started,setStarted]=useState(false);
   const frame=useRef<HTMLIFrameElement>(null),stage=useRef<HTMLDivElement>(null),dialog=useRef<HTMLDialogElement>(null),openAt=useRef('/');
   const snapshot=useRef({palette,cover});snapshot.current={palette,cover};
   const width=device==='mobile'?390:1280, height=device==='mobile'?780:790, scale=Math.min(1,available/width);
   function send(type:string,value:Record<string,unknown>={}){frame.current?.contentWindow?.postMessage({channel,type,...value},window.location.origin)}
-  const update=()=>send('draft',snapshot.current);
+  function update(){
+    const {palette,cover}=snapshot.current;
+    const instinct=cover.text.instinct;
+    const preview=instinct.alt.trim()?cover:{...cover,text:{...cover.text,instinct:{...instinct,alt:'Vista del recorte'}}};
+    send('draft',{palette,cover:preview});
+  }
   useEffect(update,[palette,cover]);
   useEffect(()=>{if(!stage.current)return;const observer=new ResizeObserver(entries=>setAvailable(entries[0].contentRect.width));observer.observe(stage.current);return()=>observer.disconnect()},[started,expanded]);
   useEffect(()=>{const handler=(event:MessageEvent)=>{if(event.source!==frame.current?.contentWindow||event.origin!==window.location.origin||event.data?.channel!==channel)return;if(event.data.type==='ready')update();if(event.data.type==='route'&&typeof event.data.path==='string')setRoute(event.data.path)};window.addEventListener('message',handler);return()=>window.removeEventListener('message',handler)},[]);

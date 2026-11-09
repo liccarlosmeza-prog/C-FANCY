@@ -30,4 +30,53 @@ const filterBundle=path.join(root,'.test-artifacts/catalog-filters.mjs');await b
 await check('Cambiar y quitar tono conserva el resto de los filtros y reinicia la página',async()=>{await resetDemo();const previous=new URLSearchParams('collection=novedades&tono=verde&page=4');const data=new FormData;data.set('q',' collar ');data.set('tono','dorado');data.set('price_min','1000');data.set('category','collares');const next=catalogFilterParams(previous,data);assert.equal(next.get('q'),'collar');assert.equal(next.get('tono'),'dorado');assert.equal(next.get('collection'),'novedades');assert.equal(next.get('category'),'collares');assert.equal(next.get('price_min'),'1000');assert.equal(next.has('page'),false);assert.equal(previous.get('tono'),'verde');const cleared=catalogFilterParams(next,data,{tono:''});assert.equal(cleared.has('tono'),false);assert.equal(cleared.get('q'),'collar');next.delete('collection');const result=await r('/products?'+next);assert.ok(result.items.length>0);assert.ok(result.items.every(item=>item.category==='collares'))});
 await check('Las portadas antiguas pierden solo los índices editoriales y conservan textos personalizados',async()=>{const draft=structuredClone(cover.defaultCover);draft.text.hero.body='Todo empieza con una mirada. Un tono te detiene y te acerca a una pieza que se siente tuya.';draft.text.hero.chapter='CAPÍTULO 01 / LA MIRADA';draft.text.instinct.caption='02 / EL INSTINTO';draft.text.advice.title='Diseños para 2026';const next=cover.readCover(draft);assert.equal(next.text.hero.body,'Un tono te llama. Una joya te encuentra.');assert.equal(next.text.hero.chapter,'LA MIRADA');assert.equal(next.text.instinct.caption,'EL INSTINTO');assert.equal(next.text.advice.title,'Diseños para 2026');draft.text.hero.body='Frase propia de la marca.';assert.equal(cover.readCover(draft).text.hero.body,draft.text.hero.body)});
 await check('Tipografía válida en paletas nuevas y anteriores, con archivos locales y licencias',async()=>{const {typography:_,...old}=theme.presets[0];assert.deepEqual(theme.readPalette(old).typography,{heading:'cormorant',body:'manrope'});const draft={...old,typography:{heading:'bodoni',body:'arial'}};assert.match(theme.cssTheme(theme.readPalette(draft))['--cf-font-heading'],/CF bodoni/);assert.match(theme.cssTheme(theme.readPalette(draft))['--cf-font-body'],/^Arial/);assert.equal(theme.readPalette({...draft,typography:{heading:'url(https://otro.invalid)',body:'arial'}}),null);const fonts=path.join(root,'assets/fonts'),css=readFileSync(path.join(fonts,'fonts.css'),'utf8');const files=[...css.matchAll(/url\("\.\/([a-z-]+\.woff2)"\)/g)].map(match=>match[1]);assert.equal(new Set(files).size,7);for(const file of files)assert.equal(readFileSync(path.join(fonts,file)).subarray(0,4).toString(),'wOF2');for(const family of ['cormorant','bodoni','fraunces','manrope'])assert.match(readFileSync(path.join(fonts,family+'-OFL.txt'),'utf8'),/SIL OPEN FONT LICENSE/)});
+await check('El recorte de portada se previsualiza, guarda y restaura con su descripción',async()=>{
+  const file=readFileSync(path.join(root,cover.defaultInstinctImage));
+  assert.equal(file.toString('ascii',8,12),'WEBP');
+  assert.equal(file.toString('ascii',12,16),'VP8X');
+  assert.ok(file[20]&16,'El recorte publicado debe declarar transparencia');
+  const old=structuredClone(cover.defaultCover);
+  delete old.text.instinct.alt;
+  assert.equal(cover.readCover(old).text.instinct.alt,cover.defaultCover.text.instinct.alt);
+  const image='data:image/webp;base64,'+file.toString('base64');
+  const draft=structuredClone(cover.defaultCover);
+  draft.instinctImage=image;
+  draft.text.instinct.alt='Figura de campaña con cadena de oro';
+  assert.equal(cover.readCover({...draft,instinctImage:'https://example.invalid/image.webp'}),null);
+  assert.equal(cover.readCover({...draft,instinctImage:'data:image/svg+xml;base64,AAAA'}),null);
+  assert.equal(cover.readCover({...draft,instinctImage:'data:image/webp;base64,'+'A'.repeat(cover.coverImageMaxLength)}),null);
+  assert.equal(cover.readCover({...old,instinctImage:image}),null);
+  cover.setCoverDraft(draft);
+  assert.equal(storage.getItem(cover.coverKey),null);
+  cover.showPreviewCover(cover.readCover(draft));
+  assert.equal(cover.currentCover().instinctImage,image);
+  assert.equal(cover.loadCover(storage).instinctImage,undefined);
+  cover.applyCover(draft);
+  assert.deepEqual(cover.loadCover(storage),draft);
+  cover.applyCover(cover.defaultCover);
+  assert.equal(cover.loadCover(storage).instinctImage,undefined);
+  storage.removeItem(cover.coverKey);
+});
+const imageBundle=path.join(root,'.test-artifacts/browser-image.mjs');
+await build({entryPoints:[path.join(root,'fuente/browser-image.ts')],bundle:true,platform:'node',format:'esm',outfile:imageBundle});
+await check('La carga de portada rechaza fondos opacos e imágenes vacías y cierra la imagen decodificada',async()=>{
+  const {optimizeImage}=await import(pathToFileURL(imageBundle));
+  const previousDocument=globalThis.document,previousBitmap=globalThis.createImageBitmap;
+  let closed=0;
+  const pixels=new Uint8ClampedArray(16);
+  const canvas={getContext:()=>({drawImage(){},getImageData:()=>({data:pixels})}),toDataURL:()=> 'data:image/webp;base64,AAAA'};
+  globalThis.document={createElement:()=>canvas};
+  globalThis.createImageBitmap=async()=>({width:2,height:2,close(){closed++}});
+  try{
+    await assert.rejects(optimizeImage(new Blob,1200,true),/transparente/);
+    pixels.fill(255);
+    await assert.rejects(optimizeImage(new Blob,1200,true),/transparente/);
+    pixels[3]=0;
+    assert.match(await optimizeImage(new Blob,1200,true),/^data:image\/webp/);
+    assert.equal(closed,3);
+  }finally{
+    globalThis.document=previousDocument;
+    globalThis.createImageBitmap=previousBitmap;
+  }
+});
 await resetDemo();console.log(`${passed} pruebas de procesos locales aprobadas.`);

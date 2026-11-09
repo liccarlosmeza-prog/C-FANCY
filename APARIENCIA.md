@@ -25,6 +25,8 @@ En **Administración → Apariencia → Tipografía** puedes escoger por separad
 
 En **Administración → Portada** cambia los títulos, las leyendas, los párrafos y los textos de los botones de cada sección. Puedes mover u ocultar los capítulos que siguen al bloque principal. Los cambios se ven junto al borrador de paleta en la misma vista previa navegable. **Aplicar portada** guarda solo en este navegador; **Descartar borrador** recupera la versión en uso.
 
-Para publicar un texto, usa **Exportar portada JSON**, coloca el archivo en `fuente/datos/portada-publica.json`, compila y publica `gh-pages`. La previsualización requiere HTTP o HTTPS, como GitHub Pages o un servidor local; no se recomienda abrir el archivo HTML directamente.
+En **Administración → Portada → Instinto y color**, usa **Reemplazar imagen** para cargar un PNG o WebP de hasta 8 MB. El archivo debe tener transparencia real. Deja espacio alrededor de la figura y escribe una descripción accesible de lo que se ve. La imagen se optimiza en el navegador y se muestra completa sobre el fondo de Campaña de la paleta. Abre la vista previa y pulsa **Ubicar componente** para revisar la sección en escritorio y móvil. **Restaurar Ónix editorial** recupera el recorte inicial en el borrador.
+
+Para publicar textos o una imagen para los visitantes, usa **Exportar portada JSON**, coloca el archivo en `fuente/datos/portada-publica.json`, compila y publica `gh-pages`. El JSON incluye la imagen optimizada cuando hay un reemplazo. La previsualización requiere HTTP o HTTPS, como GitHub Pages o un servidor local.
 
 La actualización se limita a `despliegueGithub`. La base `DESPLIEGUE`, su servidor y su rama no se modifican.

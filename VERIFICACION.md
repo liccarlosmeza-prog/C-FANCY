@@ -1,5 +1,7 @@
 # Verificación de paridad · 30/10/2026
 
+**Carga-8 · Ónix editorial.** 23 pruebas aprobadas. Se verificaron la migración de portadas anteriores, la persistencia del reemplazo y la validación de transparencia. El WebP de 1076 × 1462 pesa 299 652 bytes y conserva el canal alfa exacto del PNG, con las cuatro esquinas transparentes. El navegador está deshabilitado en Work, por lo que no hubo revisión visual de la página en escritorio y móvil.
+
 **Carga-7 · Filtros y tipografía:** 21 pruebas de procesos aprobadas. Se verificó que cambiar o quitar el tono conserva los demás filtros y reinicia la paginación, que la migración conserva el texto personalizado de portada y que las paletas anteriores siguen siendo compatibles. La compilación incluye siete archivos de fuentes locales con sus licencias. El navegador está deshabilitado en Work, por lo que esta revisión no incluye una inspección visual en pantalla.
 
 **Carga-5 · Experiencia editorial:** 18 pruebas de procesos aprobadas. Incluyen separación entre borrador y portada aplicada, orden y visibilidad, operaciones de solo lectura en la vista previa y recepción de borradores y navegación por mensajes del mismo origen. El retrato retocado se empaqueta en JPEG de 1024 × 1536, de 241 847 bytes. Se retiraron leyendas superpuestas en resultados y galería; las vistas de producto tienen un pequeño sangrado contra costuras del tríptico. El navegador está deshabilitado en Work, por lo que no se pudo reproducir visualmente la franja reportada ni revisar el diseño en pantalla durante esta sesión.
