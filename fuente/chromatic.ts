@@ -1,11 +1,11 @@
 export const tones=[
-  {id:'rojo',name:'Rojo',chakra:'Raíz',word:'Arraigo',hex:'#BC5F57',description:'Una pausa para volver a lo esencial.'},
-  {id:'ambar',name:'Ámbar',chakra:'Sacro',word:'Creatividad',hex:'#D58953',description:'Una invitación a imaginar otra forma.'},
-  {id:'dorado',name:'Dorado',chakra:'Plexo solar',word:'Presencia',hex:'#D8B575',description:'Una luz cálida que atrae la mirada.'},
-  {id:'verde',name:'Verde',chakra:'Corazón',word:'Apertura',hex:'#6B9A83',description:'Un encuentro con lo que quieres cuidar.'},
-  {id:'azul',name:'Azul',chakra:'Garganta',word:'Expresión',hex:'#72A4CA',description:'Una forma de dar voz a tu intención.'},
-  {id:'indigo',name:'Índigo',chakra:'Entrecejo',word:'Intuición',hex:'#898CCB',description:'Una mirada hacia lo que sientes.'},
-  {id:'violeta',name:'Violeta',chakra:'Corona',word:'Contemplación',hex:'#BA93CD',description:'Un instante para mirar con calma.'},
+  {id:'rojo',name:'Rojo',chakra:'Raíz',sanskrit:'Muladhara',word:'Arraigo',hex:'#BC5F57',description:'El rojo tierra evoca firmeza. En nuestra lectura del chakra raíz, representa aquello que te sostiene y te hace sentir en casa.',symbol:'Tierra',reflection:'¿Qué te devuelve a lo esencial?',petals:4},
+  {id:'ambar',name:'Ámbar',chakra:'Sacro',sanskrit:'Svadhisthana',word:'Creatividad',hex:'#D58953',description:'El ámbar toma la calidez del naranja para hablar de movimiento y deseo creativo. El chakra sacro inspira aquí la libertad de imaginar otra forma.',symbol:'Agua',reflection:'¿Qué te gustaría crear sin prisa?',petals:6},
+  {id:'dorado',name:'Dorado',chakra:'Plexo solar',sanskrit:'Manipura',word:'Presencia',hex:'#D8B575',description:'El dorado reinterpreta el amarillo solar como una luz propia. Asociamos el plexo solar con la presencia y la confianza de dar un paso deliberado.',symbol:'Sol',reflection:'¿Dónde quieres hacerte más presente?',petals:10},
+  {id:'verde',name:'Verde',chakra:'Corazón',sanskrit:'Anahata',word:'Apertura',hex:'#6B9A83',description:'El verde recuerda el crecimiento lento de una hoja. En esta lectura del chakra corazón, representa apertura, cuidado y espacio para los vínculos.',symbol:'Hoja',reflection:'¿Qué vínculo quieres cuidar hoy?',petals:12},
+  {id:'azul',name:'Azul',chakra:'Garganta',sanskrit:'Vishuddha',word:'Expresión',hex:'#72A4CA',description:'El azul abierto evoca el aire y el horizonte. Lo vinculamos con el chakra garganta como símbolo de una voz clara y una escucha atenta.',symbol:'Horizonte',reflection:'¿A qué te gustaría dar voz?',petals:16},
+  {id:'indigo',name:'Índigo',chakra:'Entrecejo',sanskrit:'Ajna',word:'Intuición',hex:'#898CCB',description:'El índigo trae la profundidad de la noche. El chakra del entrecejo inspira una mirada interior: observar lo que percibes antes de ponerle nombre.',symbol:'Mirada',reflection:'¿Qué percibes cuando bajas el ritmo?',petals:2},
+  {id:'violeta',name:'Violeta',chakra:'Corona',sanskrit:'Sahasrara',word:'Contemplación',hex:'#BA93CD',description:'El violeta sugiere un cielo al anochecer. En nuestra lectura del chakra corona, simboliza contemplación y apertura a algo más amplio que lo inmediato.',symbol:'Cielo',reflection:'¿Qué merece un momento de silencio?',petals:20},
 ] as const;
 const originals:Record<string,string[]>={'anillo-aurora':['dorado'],'pulsera-serena':['azul','indigo','dorado'],'anillo-esencia-rosa':['rojo'],'collar-origen-personalizado':['verde','dorado'],'aretes-celeste':['azul','indigo','dorado'],'collar-luz':['dorado']};
 export function toneById(id:unknown){return tones.find(t=>t.id===id)}

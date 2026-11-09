@@ -1,6 +1,8 @@
-import {useRef,useState} from 'react';
-import type {CSSProperties} from 'react';
-import {activePalette,applyPalette,colorKeys,colors,contrast,cssTheme,duplicatePalette,groupKeys,loadThemes,paletteIssues,presets,readPalette,saveThemes,sections} from './theme';
+import {useEffect,useRef,useState,useSyncExternalStore} from 'react';
+import {coverDraft,subscribeCover} from './cover';
+import {getPaletteDraft,rememberPalette} from './preview';
+import {SitePreview} from './SitePreview';
+import {activePalette,applyPalette,colorKeys,colors,contrast,duplicatePalette,groupKeys,loadThemes,paletteIssues,presets,readPalette,saveThemes,sections} from './theme';
 import type {Color,Group,Palette,Texture} from './theme';
 
 function ColorField({label,value,choices,change}:{label:string;value:string;choices:(p:Palette)=>string;change:(s:string)=>void}){
@@ -9,9 +11,10 @@ function ColorField({label,value,choices,change}:{label:string;value:string;choi
 
 export function ThemeStudio(){
   const [state,setState]=useState(()=>loadThemes());
-  const [draft,setDraft]=useState<Palette>(()=>structuredClone(activePalette(state)));
+  const [draft,setDraft]=useState<Palette>(()=>structuredClone(getPaletteDraft()??activePalette(state)));
   const [group,setGroup]=useState<Group>('site');
-  const [device,setDevice]=useState<'desktop'|'mobile'>('desktop');
+  const cover=useSyncExternalStore(subscribeCover,coverDraft);
+  useEffect(()=>{rememberPalette(draft)},[draft]);
   const [message,setMessage]=useState('');
   const [error,setError]=useState('');
   const editor=useRef<HTMLElement>(null);
@@ -29,7 +32,5 @@ export function ThemeStudio(){
   <label>Textura de portada y secciones editoriales<select value={draft.texture} onChange={e=>setDraft({...draft,texture:e.target.value as Texture})}><option value="liso">Lisa</option><option value="grano">Grano fino</option><option value="satinado">Satinada</option></select></label><label>Intensidad · {draft.intensity}%<input type="range" min="0" max="60" value={draft.intensity} disabled={draft.texture==='liso'} onChange={e=>setDraft({...draft,intensity:Number(e.target.value)})}/></label></fieldset>
   <p className="fineprint">Contraste texto/fondo de esta sección: {contrast(draft.groups[group].text,draft.groups[group].bg).toFixed(2)}:1.</p>{issues.length>0&&<div className="form-error"><strong>Combinaciones que necesitan más contraste</strong><ul>{issues.map(issue=><li key={issue}>{issue}</li>)}</ul></div>}
   <div className="button-row"><button className="primary" onClick={save} disabled={!!issues.length}>{isPreset?'Aplicar esta paleta':'Guardar y aplicar mi paleta'}</button>{isPreset&&<button className="secondary" onClick={()=>select(draft,true)}>Duplicar y editar</button>}<button className="secondary" onClick={()=>select(activePalette(state))}>Descartar vista previa</button></div><p className="fineprint">Los cambios se aplican a todo el sitio en este navegador. Para compartirlos, exporta el tema; cambiar la apariencia pública requiere una nueva publicación.</p>{message&&<p className="form-success" role="status">{message}</p>}{error&&<p className="form-error" role="alert">{error}</p>}
-  </section><section className="panel theme-preview-panel"><h2>Vista previa</h2><div className="theme-devices" aria-label="Tamaño de la vista previa"><button aria-pressed={device==='desktop'} onClick={()=>setDevice('desktop')}>Escritorio</button><button aria-pressed={device==='mobile'} onClick={()=>setDevice('mobile')}>Móvil</button></div><div className={'theme-preview '+device} style={cssTheme(draft) as CSSProperties} data-texture={draft.texture}>
-  <div className="preview-header">C’FANCY <span>Joyas · Asesoría</span></div><div className="preview-campaign textured"><small>LA MIRADA DEL COLOR</small><h3>Las joyas te eligen a ti.</h3><span className="primary">Deja que te encuentren ↗</span></div><div className="preview-catalog"><small>CATÁLOGO</small><div className="preview-card"><div className="preview-gem" aria-hidden="true">◇</div><strong>Anillo Aurora</strong><small>Una pieza de luz</small></div></div><div className="preview-forms"><label>Asesoría<input readOnly value="¿Qué color te llamó?"/></label></div><div className="preview-admin">Área de cuenta y gestión</div><div className="preview-footer">C’FANCY · El color nos conecta</div></div>
-  <div className="button-row"><button className="secondary" onClick={exportTheme}>Exportar paleta JSON</button><button className="text-button" onClick={()=>{select(presets[0]);applyPalette(presets[0]);try{const next={...state,active:presets[0].id};saveThemes(next);setState(next);setMessage('Tema inicial Ónix y oro restaurado.')}catch{applyPalette(activePalette(state));setError('No fue posible guardar el tema inicial.')}}}>Restaurar Ónix y oro</button></div><label>Importar una paleta JSON<input type="file" accept="application/json,.json" onChange={e=>{void importTheme(e.target.files?.[0]);e.currentTarget.value=''}}/></label></section></div></section>;
+  </section><div className="theme-right"><SitePreview palette={draft} cover={cover} group={group}/><section className="panel theme-preview-panel"><h2>Compartir y restaurar</h2><p>Recorre las páginas con esta paleta y tu borrador de portada.</p><div className="button-row"><button className="secondary" onClick={exportTheme}>Exportar paleta JSON</button><button className="text-button" onClick={()=>{select(presets[0]);applyPalette(presets[0]);try{const next={...state,active:presets[0].id};saveThemes(next);setState(next);setMessage('Tema inicial Ónix y oro restaurado.')}catch{applyPalette(activePalette(state));setError('No fue posible guardar el tema inicial.')}}}>Restaurar Ónix y oro</button></div><label>Importar una paleta JSON<input type="file" accept="application/json,.json" onChange={e=>{void importTheme(e.target.files?.[0]);e.currentTarget.value=''}}/></label></section></div></div></section>;
 }

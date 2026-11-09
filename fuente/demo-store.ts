@@ -1,3 +1,4 @@
+import {isPreview,previewAllowsRequest} from './preview';
 import {productTones,toneById} from './chromatic';
 // Adaptador de datos local. Estas rutas son contratos en memoria: nunca se envían por HTTP.
 import products from './datos/productos_demo.json';
@@ -41,7 +42,7 @@ export async function restoreDemo(text:string){await ready;requireAdmin();let va
 export async function demoInfo(){await ready;return{storageMode,products:state.products.length,cases:state.cases.length}}
 async function imageData(body:any,type:string){if(!['image/png','image/jpeg','image/webp'].includes(type)||!(body instanceof ArrayBuffer)||body.byteLength>8*1024*1024)fail(400,'Usa PNG, JPG o WebP de hasta 8 MB.');const blob=new Blob([body],{type});try{const bitmap=await createImageBitmap(blob);const scale=Math.min(1,1600/Math.max(bitmap.width,bitmap.height));const canvas=document.createElement('canvas');canvas.width=Math.round(bitmap.width*scale);canvas.height=Math.round(bitmap.height*scale);canvas.getContext('2d')!.drawImage(bitmap,0,0,canvas.width,canvas.height);bitmap.close();return canvas.toDataURL('image/webp',0.85)}catch{fail(400,'No se pudo leer la imagen. Selecciona una fotografía válida.')}}
 
-export async function demoRequest(url:string,options:RequestInit={}){await ready;if(options.signal?.aborted)throw new DOMException('Solicitud cancelada','AbortError');const route=new URL(url,'https://demo.local'),path=route.pathname,q=route.searchParams,method=options.method||'GET',headers=new Headers(options.headers);let b:any={};if(typeof options.body==='string'){try{b=JSON.parse(options.body)}catch{fail(400,'Datos de formulario inválidos.')}}const write=method!=='GET';const previous=write?clone(state):null;
+export async function demoRequest(url:string,options:RequestInit={}){await ready;if(options.signal?.aborted)throw new DOMException('Solicitud cancelada','AbortError');const route=new URL(url,'https://demo.local'),path=route.pathname,q=route.searchParams,method=options.method||'GET',headers=new Headers(options.headers);let b:any={};if(typeof options.body==='string'){try{b=JSON.parse(options.body)}catch{fail(400,'Datos de formulario inválidos.')}}if(isPreview&&!previewAllowsRequest(path,method)){if(path==='/events')return null;fail(403,'Vista previa de solo lectura. Sal de la previsualización para guardar cambios.')}const write=method!=='GET';const previous=write?clone(state):null;
 try{let result:any;
 if(path.startsWith('/admin/'))requireAdmin();
 if(path==='/config'){const s=state.settings;result={...s,demo:true,static_demo:true,site_origin:location.origin,policies:Object.fromEntries(['privacy','shipping','warranty','returns'].map(k=>[k,{body:s[k],status:s[k+'_status']}]))}}

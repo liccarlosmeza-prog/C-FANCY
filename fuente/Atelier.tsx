@@ -1,3 +1,5 @@
+import {CoverStudio} from './CoverStudio';
+import {isPreview} from './preview';
 import {ThemeStudio} from './ThemeStudio';
 import {tones,toneById,productTones} from './chromatic';
 import {useEffect,useRef,useState,FormEvent,ReactNode} from 'react';
@@ -62,7 +64,7 @@ export function Workspace({user,onUser,go,location}:{user:User|null;onUser:(u:Us
  const admin=location.startsWith('/admin'),view=new URLSearchParams(location.split('?')[1]).get('view')||'overview',path=location.split('?')[0],caseId=path.includes('/consultas/')?path.split('/').pop():null,a=useAction();
  if(!user)return <section className="auth-scene"><AuthPanel onUser={onUser} go={go}/></section>;
  if(admin&&user.role!=='admin')return <section className="section"><h1>Este espacio es privado.</h1><p>Tu cuenta de cliente no tiene permisos de administración.</p><button className="primary" onClick={()=>go('/cuenta')}>Ir a mi espacio</button></section>;
- const prefix=admin?'/admin':'/cuenta';const tabs=admin?[['overview','Resumen','◈'],['consultations','Atención','◇'],['products','Catálogo','◌'],['users','Clientes','♙'],['metrics','Actividad','↗'],['appearance','Apariencia','✧'],['settings','Configuración','⚙'],['mail','Buzón local','✉'],['audit','Historial','≡']]:[['overview','Mi espacio','◈'],['consultations','Mis consultas','◇'],['favorites','Mi selección','♡'],['profile','Mi perfil','♙']];
+ const prefix=admin?'/admin':'/cuenta';const tabs=admin?[['overview','Resumen','◈'],['consultations','Atención','◇'],['products','Catálogo','◌'],['users','Clientes','♙'],['metrics','Actividad','↗'],...(!isPreview?[['appearance','Apariencia','✧'],['cover','Portada','◇']]:[]),['settings','Configuración','⚙'],['mail','Buzón local','✉'],['audit','Historial','≡']]:[['overview','Mi espacio','◈'],['consultations','Mis consultas','◇'],['favorites','Mi selección','♡'],['profile','Mi perfil','♙']];
  return <div className="atelier-shell"><aside className="atelier-sidebar"><div className="workspace-brand"><span>C’FANCY</span><small>{admin?'ESTUDIO DE GESTIÓN':'MI UNIVERSO PERSONAL'}</small></div><p className="sidebar-caption">{admin?'ATELIER / OPERACIÓN':'TU HISTORIA, ACOMPAÑADA'}</p><nav aria-label={admin?'Administración':'Cuenta personal'}>{tabs.map(([id,label,icon])=><button className={!caseId&&view===id?'selected':''} key={id} onClick={()=>go(prefix+'?view='+id)}><span>{icon}</span>{label}{admin&&id==='consultations'&&<small>CRM</small>}</button>)}</nav><div className="sidebar-bottom"><button onClick={()=>go('/joyas')}>← Explorar la colección</button>{!admin&&user.role==='admin'&&<button onClick={()=>go('/admin')}>Administración ↗</button>}<button onClick={()=>a.run(async()=>{await mutate('/auth/logout');onUser(null);go('/')},'Sesión cerrada.')}>Cerrar sesión</button><small>{user.name}<br/>{user.email}</small></div></aside><section className="atelier-content"><div className="workspace-top"><span>{admin?'GESTIÓN C’FANCY':'UN ESPACIO MUY TUYO'}</span><span className="profile-chip"><i>{user.name[0]}</i>{user.name}</span></div><Feedback a={a}/>{caseId?<CasePage id={caseId} user={user}/>:admin?<AdminView view={view} go={go} user={user}/>:<ClientView view={view} user={user} onUser={onUser} go={go}/>}</section></div>;
 }
 
@@ -80,7 +82,8 @@ type Overview={total_consultations:number;open_consultations:number;new_consulta
 function AdminView({view,go,user}:{view:string;go:Go;user:User}){
  const overview=useLoad<Overview>('/admin/overview');
  if(view==='products')return <CatalogAdmin/>;
- if(view==='appearance')return <ThemeStudio/>;
+ if(!isPreview&&view==='appearance')return <ThemeStudio/>;
+ if(!isPreview&&view==='cover')return <CoverStudio/>;
  if(view==='settings')return <SettingsAdmin/>;
  if(view==='consultations')return <ConsultationAdmin go={go}/>;
  if(view==='users')return <UsersAdmin/>;
