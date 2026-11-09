@@ -17,6 +17,10 @@ El tema se exporta e importa como un JSON independiente del respaldo de cuentas 
 
 **Deja que una joya te encuentre** abre la exploración por color. Seleccionar un tono muestra su chakra, significado y símbolo. Pulsa **Ver joyas** para aplicar el filtro; el catálogo muestra el tono activo, permite quitarlo y regresar a su explicación. Los tonos sin piezas ofrecen asesoría. El formulario conserva el tono que llevó a la consulta. En **Administración → Catálogo**, cada ficha permite editar sus **Tonos de inspiración**. La etiqueta expresa afinidad de color e intención, no el tipo de gema ni una propiedad terapéutica.
 
+## Editar la tipografía
+
+En **Administración → Apariencia → Tipografía** puedes escoger por separado la fuente de títulos y la de textos y navegación. La combinación inicial es Cormorant Garamond con Manrope. Cambiar la letra de una base crea una copia editable; la vista previa permite probarla antes de aplicar. El logo conserva su diseño. La selección viaja con la paleta exportada y las paletas anteriores siguen siendo compatibles.
+
 ## Editar la portada
 
 En **Administración → Portada** cambia los títulos, las leyendas, los párrafos y los textos de los botones de cada sección. Puedes mover u ocultar los capítulos que siguen al bloque principal. Los cambios se ven junto al borrador de paleta en la misma vista previa navegable. **Aplicar portada** guarda solo en este navegador; **Descartar borrador** recupera la versión en uso.

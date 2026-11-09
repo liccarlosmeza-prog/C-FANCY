@@ -1,0 +1,13 @@
+:root{--cf-font-heading:"CF cormorant",Georgia,serif;--cf-font-body:"CF manrope",Arial,sans-serif;font-family:var(--cf-font-body)}
+button,input,select,textarea,.static-tools{font-family:var(--cf-font-body)}
+h1,h2,h3,h4,.detail .detail-price,.tone-card strong,.tone-question,.gaze-copy .gaze-subtitle,.workspace-brand,.stat strong,footer strong{font-family:var(--cf-font-heading);font-weight:500}
+#root>header .brand-wordmark{font-family:Georgia,serif}#root>header .brand-wordmark small{font-family:Arial,sans-serif}
+.type-fields>div{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.type-fields .fineprint{margin-bottom:0}
+.catalog-filters{margin:0 0 clamp(22px,4vw,44px);padding:clamp(12px,2.5vw,24px);border:1px solid color-mix(in srgb,var(--line) 72%,transparent);border-radius:18px;background:color-mix(in srgb,var(--ink) 4%,var(--paper))}
+.catalog-filter-heading{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:4px 14px;margin-bottom:14px}
+.catalog-filter-heading h2{font-family:var(--cf-font-body);font-weight:650;font-size:13px;letter-spacing:.035em;margin:0}.catalog-filter-heading .text-button{min-height:34px;padding:3px 0}
+.catalog-filter-fields{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,142px),1fr));gap:11px 14px;align-items:end}
+.catalog-filter-fields label{margin:0;min-width:0;font-size:12px}.catalog-filter-fields :is(input,select){width:100%;min-width:0;max-width:none;min-height:44px;margin-top:5px;padding:8px 9px;font-size:14px}.catalog-filter-fields .filter-submit{height:44px;padding:5px 12px;white-space:nowrap}
+.catalog-filter-context{display:flex;align-items:center;flex-wrap:wrap;gap:2px 14px;border-top:1px solid color-mix(in srgb,var(--line) 60%,transparent);margin-top:15px;padding-top:8px;font-size:12px}.catalog-filter-context .text-button{min-height:33px;padding:3px 0}.filter-tone-label strong{font-weight:700}
+@media(min-width:1010px){.catalog-filter-fields{grid-template-columns:repeat(4,minmax(0,1fr))}}
+@media(max-width:500px){.catalog-filter-fields{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.catalog-filter-fields .filter-search,.catalog-filter-fields .filter-submit{grid-column:1/-1}.catalog-filter-fields :is(input,select){font-size:16px}}

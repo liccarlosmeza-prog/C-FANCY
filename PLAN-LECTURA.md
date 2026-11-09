@@ -1,0 +1,8 @@
+# Ajuste de lectura y filtros · C’FANCY
+
+1. **Catálogo.** La captura muestra la barra de categorías con etiquetas casi invisibles: el fondo heredó el color del texto. Sustituirla por un selector identificado dentro de Filtros. Situar el tono, el enlace a su significado y la opción de quitarlo en ese mismo grupo; conservar el tono activo y los demás parámetros de búsqueda al cambiarlo.
+2. **Portada y rótulos.** Publicar «Un tono te llama. Una joya te encuentra.» Quitar los índices de capítulos, fichas editoriales, tonos, materiales y colecciones. Conservar quilatajes, medidas, precios y números de página, que sí sirven a la visitante.
+3. **Tipografía.** Recomendar Cormorant Garamond para los títulos y Manrope para los textos y controles. Permitir también Bodoni Moda o Fraunces en títulos, y Arial en lectura. Cargar las fuentes en el sitio con sus licencias; conservar el logo y el tamaño del menú. Editar en Apariencia y probar en la vista previa móvil y de escritorio antes de aplicar.
+4. **Validar y publicar.** Comprobar filtros combinados, compatibilidad de paletas y portadas guardadas, y entrega de las fuentes desde GitHub Pages. Publicar solo en `gh-pages`; no modificar `DESPLIEGUE`.
+
+Fuentes del estudio: [Cormorant, Catharsis Fonts](https://github.com/CatharsisFonts/Cormorant), [Bodoni Moda, Indestructible Type](https://github.com/indestructible-type/Bodoni), [Fraunces, Undercase Type](https://github.com/undercasetype/Fraunces) y [Manrope, ficha del proyecto](https://github.com/google/fonts/blob/main/ofl/manrope/DESCRIPTION.en_us.html). La asociación con una marca de joyería es una recomendación de diseño, no una clasificación universal.
